@@ -4,16 +4,16 @@
 //
 //  Created by Pachipulusu,Venkatakotianilkumar on 11/8/16.
 //  Copyright © 2016 Gayam,Prathibha. All rights reserved.
-//
+// This class contains code for various data operations
 import UIKit
 import Bolts
 import Parse
 class ParseOperations {
     // Data for breakfast,lunch,dinner and latenight view controllers
-    var breakfastData:[FoodData] = []
-    var lunchData:[FoodData] = []
-    var dinnerData:[FoodData] = []
-    var lateNightData:[FoodData] = []
+    static var breakfastData:[FoodData] = []
+    static  var lunchData:[FoodData] = []
+    static var dinnerData:[FoodData] = []
+    static var lateNightData:[FoodData] = []
     var user : [Profile] = []
     // Data for favorites view controller
     var  favoriteBreakfast:[FavoritesData] = []
@@ -26,50 +26,50 @@ class ParseOperations {
     var dinnerIntake:[CaloriesData] = []
     var lateNightIntake:[CaloriesData] = []
     // Retrives data from Food data table and if it is breakfast
-    func retrieveBreakFastMenu(){
+    static func retrieveBreakFastMenu(){
         let query = PFQuery(className:"FoodData")
         query.whereKey("mealType", equalTo:"Breakfast")
         query.findObjectsInBackgroundWithBlock {
             (objects: [PFObject]?, error: NSError?) -> Void in
             if error == nil {
-                self.breakfastData = objects as! [FoodData]
+                ParseOperations.breakfastData = objects as! [FoodData]
                 NSNotificationCenter.defaultCenter().postNotificationName("Breakfast Is Served", object: nil)
             }
         }
     }
     // Retrives data from Food data table and if it is Lunch
-    func retrieveLunchMenu()  {
+   static func retrieveLunchMenu()  {
         let query = PFQuery(className:"FoodData")
         query.whereKey("mealType", equalTo:"Lunch")
         query.findObjectsInBackgroundWithBlock {
             (objects: [PFObject]?, error: NSError?) -> Void in
             if error == nil {
                 
-                self.lunchData = objects as! [FoodData]
+                ParseOperations.lunchData = objects as! [FoodData]
                 NSNotificationCenter.defaultCenter().postNotificationName("Lunch Is Served", object: nil)
             }
         }
     }
     // Retrives data from Food data table and if it is Dinner
-    func retrieveDinnerMenu() {
+    static func retrieveDinnerMenu() {
         let query = PFQuery(className:"FoodData")
         query.whereKey("mealType", equalTo:"Dinner")
         query.findObjectsInBackgroundWithBlock {
             (objects: [PFObject]?, error: NSError?) -> Void in
             if error == nil {
-                self.dinnerData = objects as! [FoodData]
+                ParseOperations.dinnerData = objects as! [FoodData]
                 NSNotificationCenter.defaultCenter().postNotificationName("Dinner Is Served", object: nil)
             }
         }
     }
     // Retrives data from Food data table and if it is LateNight
-    func retrieveLateNightMenu()  {
+    static func retrieveLateNightMenu()  {
         let query = PFQuery(className:"FoodData")
         query.whereKey("mealType", equalTo:"Late Night")
         query.findObjectsInBackgroundWithBlock {
             (objects: [PFObject]?, error: NSError?) -> Void in
             if error == nil {
-                self.lateNightData = objects as! [FoodData]
+                ParseOperations.lateNightData = objects as! [FoodData]
                 NSNotificationCenter.defaultCenter().postNotificationName("lateNight Is Served", object: nil)
             }
         }
@@ -126,7 +126,7 @@ class ParseOperations {
             }
         }
     }
-    //Allows to delete food items from favourite breakfast
+    //Allows to delete food items from favouritedata table and if it is breakfast and selected item
     func deleteFavoriteBreakfast(itemName:String , userName :String) {
         let query = PFQuery(className: "FavoritesData")
         query.whereKey("itemName", equalTo: itemName).whereKey("mealType", equalTo:"Breakfast").whereKey("sid" , equalTo:userName)
@@ -140,7 +140,8 @@ class ParseOperations {
             }
         }
     }
-    //Allows to delete food items from favourite lunch
+    //Allows to delete food items from favouritedata table and if it is lunch selected item
+
     func deleteFavoriteLunch(itemName:String, userName :String) {
         let query = PFQuery(className: "FavoritesData")
         query.whereKey("itemName", equalTo: itemName).whereKey("mealType", equalTo:"Lunch").whereKey("sid" , equalTo:userName)
@@ -154,7 +155,8 @@ class ParseOperations {
             }
         }
     }
-    //Allows to delete food items from favourite dinner
+    //Allows to delete food items from favouritedata table and if it is  dinner selected item
+
     func deleteFavoriteDinner(itemName:String, userName :String) {
         let query = PFQuery(className: "FavoritesData")
         query.whereKey("itemName", equalTo: itemName).whereKey("mealType", equalTo:"Dinner").whereKey("sid" , equalTo:userName)
@@ -168,7 +170,8 @@ class ParseOperations {
             }
         }
     }
-    //Allows to delete food items from favourite lastnight
+    //Allows to delete food items from favouritedata table and if it is lastnight selected item
+
     func deleteFavoriteLateNight(itemName:String, userName :String) {
         let query = PFQuery(className: "FavoritesData")
         query.whereKey("itemName", equalTo: itemName).whereKey("mealType", equalTo:"Late Night").whereKey("sid" , equalTo:userName)
@@ -182,7 +185,7 @@ class ParseOperations {
             }
         }
     }
-    //Allows to save favourite beakfast food items
+    //Allows to save favourite beakfast food items into Favoritesdata table
     func saveFvaoriteBreakfastdata(favorites: FavoritesData) {
         favorites.saveInBackgroundWithBlock({ (success, error) -> Void in
             if success {
@@ -190,14 +193,14 @@ class ParseOperations {
             }
         })
     }
-    //Allows to save favourite lunch food items
+    //Allows to save favourite lunch food items Favoritesdata table
     func saveFvaoriteLunchdata(favorites: FavoritesData) {
         favorites.saveInBackgroundWithBlock({ (success, error) -> Void in
             if success {
                 NSNotificationCenter.defaultCenter().postNotificationName("Added to Favorites", object: nil)           }
         })
     }
-    //Allows to save favourite dinner food items
+    //Allows to save favourite dinner food items Favoritesdata table
     func saveFvaoriteDinnerdata(favorites: FavoritesData) {
         favorites.saveInBackgroundWithBlock({ (success, error) -> Void in
             if success {
@@ -205,7 +208,7 @@ class ParseOperations {
             }
         })
     }
-    //Allows to save favourite Latenight food items
+    //Allows to save favourite Latenight food items Favoritesdata table
     func saveFvaoriteLateNightdata(favorites: FavoritesData) {
         favorites.saveInBackgroundWithBlock({ (success, error) -> Void in
             if success {
@@ -213,7 +216,7 @@ class ParseOperations {
             }
         })
     }
-    //Allows us to retrieve the user name
+    //Allows us to retrieve the user details for profile view controller
     func retrieveUser(userName :String)  {
         let query = PFQuery(className:"Profile")
         query.whereKey("sid", equalTo: userName)

@@ -9,24 +9,23 @@
 import UIKit
 import Parse
 import Bolts
-
+// This class allows a new user to register
 class RegisterViewController: UIViewController {
+    
+    // This is the outlet for firstname text field and holds firstname
     @IBOutlet weak var firstNameTF: UITextField!
+  // This is the outlet for lastname text field and holds lastname
     @IBOutlet weak var lastNameTF: UITextField!
+   // This is the outlet for username text field and holds username
     @IBOutlet weak var userNameTF: UITextField!
-    @IBOutlet weak var bearcatIdTF: UITextField!
+    // This is the outlet for email id text field and holds email id
+    @IBOutlet weak var emailIdTF: UITextField!
+    // This is the outlet for password text field and holds password
     @IBOutlet weak var passwordTF: UITextField!
+    // This is the outlet for confirm password text field and holds confirm password
     @IBOutlet weak var confirmPasswordTF: UITextField!
-    @IBOutlet weak var passwordLBL: UILabel!
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "hotel-dining.jpg")!)
-        // Do any additional setup after loading the view.
-    }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+
+    // This method provides the functionality for registerbutton. It validates all the inputs provided in various text fields if all inputs are propere user is registered in database
     @IBAction func registerBTN(sender: UIButton) {
         let user = PFUser()
         if firstNameTF.text!.isEmpty{
@@ -56,25 +55,25 @@ class RegisterViewController: UIViewController {
             user.username = userNameTF.text!
             userNameTF.layer.borderColor = UIColor.whiteColor().CGColor
         }
-        if bearcatIdTF.text!.isEmpty{
-            bearcatIdTF.layer.borderWidth = 1
-            bearcatIdTF.layer.borderColor = UIColor.redColor().CGColor
+        if emailIdTF.text!.isEmpty{
+            emailIdTF.layer.borderWidth = 1
+            emailIdTF.layer.borderColor = UIColor.redColor().CGColor
             displayAlertControllerWithTitleforFailure("Fail!", message:"Enter Email")
         }
         else
         {
             let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
-            let range = bearcatIdTF.text!.rangeOfString(emailRegEx, options:.RegularExpressionSearch)
+            let range = emailIdTF.text!.rangeOfString(emailRegEx, options:.RegularExpressionSearch)
             let result = range != nil ? true : false
             if result == false
             {
-                bearcatIdTF.text = ""
-                bearcatIdTF.layer.borderWidth = 1
-                bearcatIdTF.layer.borderColor = UIColor.redColor().CGColor
+                emailIdTF.text = ""
+                emailIdTF.layer.borderWidth = 1
+                emailIdTF.layer.borderColor = UIColor.redColor().CGColor
                 displayAlertControllerWithTitleforFailure("Fail!", message:"Please provide proper email")
             }
             else{
-                user.email = bearcatIdTF.text!
+                user.email = emailIdTF.text!
                 passwordTF.layer.borderColor = UIColor.whiteColor().CGColor
             }
         }
@@ -117,13 +116,15 @@ class RegisterViewController: UIViewController {
                 self.onSuccess()
             }
             else {
-                self.displayAlertWithTitleForError("", message: "Account is already exist for the username and email combination")
+                self.displayAlertControllerWithTitleforFailure("", message: "Account is already exist for the username and email combination")
             }
         }
     }
+    // calls alert method if registaration is success
     func onSuccess() {
         displayAlertWithTitle("Success", message:"Registration Successful")
     }
+    // Populates the alert. Presents the alert view controller for different types of alerts
     func displayAlertWithTitle(title:String, message:String) {
         let uiAlertController:UIAlertController = UIAlertController(title: title,
                                                                     message: message, preferredStyle: UIAlertControllerStyle.Alert)
@@ -133,14 +134,8 @@ class RegisterViewController: UIViewController {
             self.presentViewController(uiAlertController, animated: true, completion: nil)
         }
     }
-    func displayAlertWithTitleForError(title:String, message:String) {
-        let uiAlertController:UIAlertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        uiAlertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel,
-            handler:{(action:UIAlertAction)->Void in }))
-        if presentedViewController ==  nil{
-            self.presentViewController(uiAlertController, animated: true, completion: nil)
-        }
-    }
+    // Populates the alert for error. Presents the alert view controller for different types of errors
+
     func displayAlertControllerWithTitleforFailure(title:String, message:String){
         let alert:UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         let defaultAction:UIAlertAction =  UIAlertAction(title: "OK", style: .Default, handler: nil)
@@ -149,6 +144,18 @@ class RegisterViewController: UIViewController {
             self.presentViewController(alert, animated: true, completion: nil)
         }
     }
+    // Method for cancel button in register view controller
     @IBAction func cancelBTN(sender: AnyObject) {
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "hotel-dining.jpg")!)
+        // Do any additional setup after loading the view.
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
 }

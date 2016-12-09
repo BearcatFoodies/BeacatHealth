@@ -54,8 +54,6 @@
 		5C7185481DA70DA900A3CAE0 /* BearcatHealthUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7185471DA70DA900A3CAE0 /* BearcatHealthUITests.swift */; };
 		5C7185601DA70F9500A3CAE0 /* CalorieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C71855F1DA70F9500A3CAE0 /* CalorieViewController.swift */; };
 		5C7185621DA70FDF00A3CAE0 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7185611DA70FDF00A3CAE0 /* ProfileViewController.swift */; };
-		84951FDB1DEA9ACA00FEACB8 /* temporary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84951FDA1DEA9ACA00FEACB8 /* temporary.swift */; };
-		849A06ED1DEF979A00D90293 /* SampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849A06EC1DEF979A00D90293 /* SampleViewController.swift */; };
 		C9072C54CB6357A0DF5AAD15 /* Pods_BearcatHealth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C741C98A8089BA885483EE00 /* Pods_BearcatHealth.framework */; };
 		ED72D4CA283D5B2B7332406B /* Pods_BearcatHealthUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D48F22B6A6076148CA027E54 /* Pods_BearcatHealthUITests.framework */; };
 /* End PBXBuildFile section */
@@ -80,18 +78,18 @@
 /* Begin PBXFileReference section */
 		1577A6AE16DC187EB52BCBEF /* Pods-BearcatHealth.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BearcatHealth.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BearcatHealth/Pods-BearcatHealth.debug.xcconfig"; sourceTree = "<group>"; };
 		4D00C9C41DD3A27F00A23EC6 /* EditFavoriteTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditFavoriteTableViewController.swift; sourceTree = "<group>"; };
-		4D1AFF331DDAC00000D51BF4 /* hotel-dining.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "hotel-dining.jpg"; sourceTree = "<group>"; };
+		4D1AFF331DDAC00000D51BF4 /* hotel-dining.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "hotel-dining.jpg"; path = "BearcatHealth/hotel-dining.jpg"; sourceTree = "<group>"; };
 		4D23AE631DDA19410079AE50 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4D4BBDC11DA83A820045C143 /* LunchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LunchTableViewController.swift; path = ../LunchTableViewController.swift; sourceTree = "<group>"; };
 		4D4CF07B1DF5216400CB2749 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ForgotPasswordViewController.swift; path = ../ForgotPasswordViewController.swift; sourceTree = "<group>"; };
-		4D5B32A41DDAA54A002FD600 /* Aqua-Gradient-iphone-4s-wallpaper-ilikewallpaper_com.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Aqua-Gradient-iphone-4s-wallpaper-ilikewallpaper_com.jpg"; sourceTree = "<group>"; };
-		4D5B32A61DDAA6DA002FD600 /* dining.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = dining.jpg; sourceTree = "<group>"; };
+		4D5B32A41DDAA54A002FD600 /* Aqua-Gradient-iphone-4s-wallpaper-ilikewallpaper_com.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Aqua-Gradient-iphone-4s-wallpaper-ilikewallpaper_com.jpg"; path = "BearcatHealth/Aqua-Gradient-iphone-4s-wallpaper-ilikewallpaper_com.jpg"; sourceTree = "<group>"; };
+		4D5B32A61DDAA6DA002FD600 /* dining.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = dining.jpg; path = BearcatHealth/dining.jpg; sourceTree = "<group>"; };
 		4D6FCD9C1DD2ACEA00B708F0 /* ParseOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseOperations.swift; sourceTree = "<group>"; };
 		4D70759E1DD168D1006B05D1 /* FavoritesData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesData.swift; sourceTree = "<group>"; };
-		4D9C7BD91DBEC111009368A0 /* Clock-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Clock-25.png"; sourceTree = "<group>"; };
-		4D9C7BDA1DBEC111009368A0 /* Fire Element-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Fire Element-25.png"; sourceTree = "<group>"; };
-		4D9C7BDB1DBEC111009368A0 /* Star-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Star-25.png"; sourceTree = "<group>"; };
-		4D9C7BDC1DBEC111009368A0 /* User Filled-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "User Filled-25.png"; sourceTree = "<group>"; };
+		4D9C7BD91DBEC111009368A0 /* Clock-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Clock-25.png"; path = "BearcatHealth/Clock-25.png"; sourceTree = "<group>"; };
+		4D9C7BDA1DBEC111009368A0 /* Fire Element-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Fire Element-25.png"; path = "BearcatHealth/Fire Element-25.png"; sourceTree = "<group>"; };
+		4D9C7BDB1DBEC111009368A0 /* Star-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Star-25.png"; path = "BearcatHealth/Star-25.png"; sourceTree = "<group>"; };
+		4D9C7BDC1DBEC111009368A0 /* User Filled-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "User Filled-25.png"; path = "BearcatHealth/User Filled-25.png"; sourceTree = "<group>"; };
 		4DB26EC71DDD50FC00828279 /* CaloriesData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaloriesData.swift; sourceTree = "<group>"; };
 		4DC051CF1DF0E7BA00079078 /* Charts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Charts.framework; path = "/Users/s525810/Library/Developer/Xcode/DerivedData/BearcatHealth-azgxsdmcwumlmkegszithhuigjwm/Build/Products/Debug-iphonesimulator/Charts/Charts.framework"; sourceTree = "<absolute>"; };
 		4DCC1B6A1DCA62AE00F1CAF3 /* ChooseFavoritesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseFavoritesTableViewController.swift; sourceTree = "<group>"; };
@@ -99,7 +97,7 @@
 		4DE3677A1DA8437300A82599 /* DinnerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DinnerTableViewController.swift; sourceTree = "<group>"; };
 		4DE367A61DA859AB00A82599 /* LateNightTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LateNightTableViewController.swift; sourceTree = "<group>"; };
 		4DE7068F1DECBD2100D584B6 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		4DE8ED561DF50B5300A3FACE /* Bearcats.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Bearcats.jpg; sourceTree = "<group>"; };
+		4DE8ED561DF50B5300A3FACE /* Bearcats.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Bearcats.jpg; path = BearcatHealth/Bearcats.jpg; sourceTree = "<group>"; };
 		4DE929941DC0215B000F39CA /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		4DE929961DC02162000F39CA /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		4DE929981DC02171000F39CA /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -133,8 +131,6 @@
 		5C71855F1DA70F9500A3CAE0 /* CalorieViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalorieViewController.swift; sourceTree = "<group>"; };
 		5C7185611DA70FDF00A3CAE0 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		5CAE663E1DF0F7E00020CC9B /* Charts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Charts.framework; path = "/Users/s525719/Library/Developer/Xcode/DerivedData/BearcatHealth-gqewopsqpqnjvtgnfdsahkkquqiw/Build/Products/Debug-iphonesimulator/Charts/Charts.framework"; sourceTree = "<absolute>"; };
-		84951FDA1DEA9ACA00FEACB8 /* temporary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = temporary.swift; sourceTree = "<group>"; };
-		849A06EC1DEF979A00D90293 /* SampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleViewController.swift; sourceTree = "<group>"; };
 		A122D956B17A9A4EF1000BFE /* Pods-BearcatHealthUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BearcatHealthUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BearcatHealthUITests/Pods-BearcatHealthUITests.release.xcconfig"; sourceTree = "<group>"; };
 		B7649AD3149E7CF5F6D38A54 /* Pods-BearcatHealthUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BearcatHealthUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BearcatHealthUITests/Pods-BearcatHealthUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		C741C98A8089BA885483EE00 /* Pods_BearcatHealth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BearcatHealth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -186,6 +182,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4D55B6B41DFA28E3000BED42 /* Model classes */ = {
+			isa = PBXGroup;
+			children = (
+				4DE929B61DC033B1000F39CA /* Profile.swift */,
+				4D70759E1DD168D1006B05D1 /* FavoritesData.swift */,
+				4DF0BD161DC948CD0054867F /* FoodData.swift */,
+				4DB26EC71DDD50FC00828279 /* CaloriesData.swift */,
+			);
+			name = "Model classes";
+			sourceTree = "<group>";
+		};
+		4D55B6B51DFA291B000BED42 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				4D5B32A41DDAA54A002FD600 /* Aqua-Gradient-iphone-4s-wallpaper-ilikewallpaper_com.jpg */,
+				4D9C7BD91DBEC111009368A0 /* Clock-25.png */,
+				4DE8ED561DF50B5300A3FACE /* Bearcats.jpg */,
+				4D9C7BDA1DBEC111009368A0 /* Fire Element-25.png */,
+				4D1AFF331DDAC00000D51BF4 /* hotel-dining.jpg */,
+				4D5B32A61DDAA6DA002FD600 /* dining.jpg */,
+				4D9C7BDB1DBEC111009368A0 /* Star-25.png */,
+				4D9C7BDC1DBEC111009368A0 /* User Filled-25.png */,
+			);
+			name = Images;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		4DE929B81DC03D39000F39CA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -237,9 +260,9 @@
 		5C7185241DA70DA900A3CAE0 /* BearcatHealth */ = {
 			isa = PBXGroup;
 			children = (
+				4D6FCD9C1DD2ACEA00B708F0 /* ParseOperations.swift */,
 				4D4CF07B1DF5216400CB2749 /* ForgotPasswordViewController.swift */,
 				4DEB7E121DF24B0F00826C00 /* HelpViewController.swift */,
-				4D6FCD9C1DD2ACEA00B708F0 /* ParseOperations.swift */,
 				5C7185251DA70DA900A3CAE0 /* AppDelegate.swift */,
 				4DDD21001DDA429800703400 /* RegisterViewController.swift */,
 				5C7185271DA70DA900A3CAE0 /* MenuViewController.swift */,
@@ -257,20 +280,8 @@
 				5C71852E1DA70DA900A3CAE0 /* Assets.xcassets */,
 				5C7185301DA70DA900A3CAE0 /* LaunchScreen.storyboard */,
 				5C7185331DA70DA900A3CAE0 /* Info.plist */,
-				4D5B32A41DDAA54A002FD600 /* Aqua-Gradient-iphone-4s-wallpaper-ilikewallpaper_com.jpg */,
-				4D9C7BD91DBEC111009368A0 /* Clock-25.png */,
-				4DE8ED561DF50B5300A3FACE /* Bearcats.jpg */,
-				4D9C7BDA1DBEC111009368A0 /* Fire Element-25.png */,
-				4D1AFF331DDAC00000D51BF4 /* hotel-dining.jpg */,
-				4D5B32A61DDAA6DA002FD600 /* dining.jpg */,
-				4D9C7BDB1DBEC111009368A0 /* Star-25.png */,
-				4D9C7BDC1DBEC111009368A0 /* User Filled-25.png */,
-				4DE929B61DC033B1000F39CA /* Profile.swift */,
-				4D70759E1DD168D1006B05D1 /* FavoritesData.swift */,
-				4DF0BD161DC948CD0054867F /* FoodData.swift */,
-				4DB26EC71DDD50FC00828279 /* CaloriesData.swift */,
-				84951FDA1DEA9ACA00FEACB8 /* temporary.swift */,
-				849A06EC1DEF979A00D90293 /* SampleViewController.swift */,
+				4D55B6B51DFA291B000BED42 /* Images */,
+				4D55B6B41DFA28E3000BED42 /* Model classes */,
 			);
 			path = BearcatHealth;
 			sourceTree = "<group>";
@@ -605,11 +616,9 @@
 				4DE929B71DC033B1000F39CA /* Profile.swift in Sources */,
 				5C4739ED1DA80EB500A381E2 /* FavoritesTableViewController.swift in Sources */,
 				4DCC1B6B1DCA62AE00F1CAF3 /* ChooseFavoritesTableViewController.swift in Sources */,
-				849A06ED1DEF979A00D90293 /* SampleViewController.swift in Sources */,
 				5C7185261DA70DA900A3CAE0 /* AppDelegate.swift in Sources */,
 				4D00C9C51DD3A27F00A23EC6 /* EditFavoriteTableViewController.swift in Sources */,
 				4D70759F1DD168D1006B05D1 /* FavoritesData.swift in Sources */,
-				84951FDB1DEA9ACA00FEACB8 /* temporary.swift in Sources */,
 				4D6FCD9D1DD2ACEA00B708F0 /* ParseOperations.swift in Sources */,
 				4DF0BD171DC948CD0054867F /* FoodData.swift in Sources */,
 				4DB26EC81DDD50FC00828279 /* CaloriesData.swift in Sources */,

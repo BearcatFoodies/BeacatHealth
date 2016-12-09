@@ -51,12 +51,11 @@ class LateNightTableViewController: UITableViewController {
         return cell
     }
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.Checkmark
+       
         selectedLateNight = foodInfo[indexPath.row]
     }
     override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.cellForRowAtIndexPath(indexPath)?.accessoryType =
-            UITableViewCellAccessoryType.None
+       
         selectedLateNight = FoodData()
     }
     @IBAction func addCalories(sender: UIBarButtonItem) {

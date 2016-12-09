@@ -27,7 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let parseOperations = ParseOperations()
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        temporary.registerSubclass()
         Profile.registerSubclass()
         FoodData.registerSubclass()
         PFUser.registerSubclass()

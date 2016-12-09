@@ -43,28 +43,22 @@ class FavoritesTableViewController: UITableViewController {
         super.viewDidLoad()
     }
     override func viewWillAppear(animated: Bool) {
-        parseOperations.retrieveBreakFastMenu()
-        parseOperations.retrieveLunchMenu()
-        parseOperations.retrieveDinnerMenu()
-        parseOperations.retrieveLateNightMenu()
+
         parseOperations.retrieveFavoriteBreakFastMenu(appDelegate.userName)
         parseOperations.retrieveFavoriteLunchMenu(appDelegate.userName)
         parseOperations.retrieveFavoriteDinnerMenu(appDelegate.userName)
         parseOperations.retrieveFavoriteLateNightMenu(appDelegate.userName)
-        self.favoriteBreakfast = parseOperations.favoriteBreakfast
-        self.favoriteLunch = parseOperations.favoriteLunch
-        self.favoriteDinner = parseOperations.favoriteDinner
-        self.favoriteLateNight = parseOperations.favoriteLateNight
+      
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(favoritesIsHere(_:)), name: "Favorites Dinner Is Served", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(favoritesIsHere(_:)), name: "Favorites Breakfast Is Served", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(favoritesIsHere(_:)), name: "Favorites Lunch Is Served", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(favoritesIsHere(_:)), name: "Favorites LateNight Is Served", object: nil)
     }
     func favoritesIsHere(notification:NSNotification) {
-        self.favoriteBreakfast = parseOperations.favoriteBreakfast
-        self.favoriteLunch = parseOperations.favoriteLunch
-        self.favoriteDinner = parseOperations.favoriteDinner
-        self.favoriteLateNight = parseOperations.favoriteLateNight
+        self.favoriteBreakfast = parseOperations.favoriteBreakfast.sort({ $0.itemName < $1.itemName})
+        self.favoriteLunch = parseOperations.favoriteLunch.sort({ $0.itemName < $1.itemName})
+        self.favoriteDinner = parseOperations.favoriteDinner.sort({ $0.itemName < $1.itemName})
+        self.favoriteLateNight = parseOperations.favoriteLateNight.sort({ $0.itemName < $1.itemName})
         favoritesTableView.reloadData()
     }
     //return the number of sections in a table
@@ -125,15 +119,8 @@ class FavoritesTableViewController: UITableViewController {
         return cell
     }
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.Checkmark
-        if selected {
-            if selectedIndexPath == indexPath.row {
-                tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.None
-                selectedIndexPath = 0
-                selected = false
-            }
-        }
-        selected = true
+       
+
         if indexPath.section == 0 {
             selectedFavoriteBreakfastIntake = favoriteBreakfast[indexPath.row]
         } else if indexPath.section == 1{
@@ -152,8 +139,7 @@ class FavoritesTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.cellForRowAtIndexPath(indexPath)?.accessoryType =
-            UITableViewCellAccessoryType.None
+     
         
         if indexPath.section == 0 {
             selectedFavoriteBreakfastIntake = FavoritesData()
@@ -174,10 +160,10 @@ class FavoritesTableViewController: UITableViewController {
         if segue.identifier == "chooseFavorites" {
             let choseFavoritesTVC: ChooseFavoritesTableViewController = segue.destinationViewController as! ChooseFavoritesTableViewController
             self.navigationItem.title = "Favorites"
-            choseFavoritesTVC.breakfast = parseOperations.breakfastData
-            choseFavoritesTVC.lunch = parseOperations.lunchData
-            choseFavoritesTVC.dinner = parseOperations.dinnerData
-            choseFavoritesTVC.lateNight = parseOperations.lateNightData
+            choseFavoritesTVC.breakfast = ParseOperations.breakfastData.sort({ $0.itemName < $1.itemName})
+            choseFavoritesTVC.lunch = ParseOperations.lunchData.sort({ $0.itemName < $1.itemName})
+            choseFavoritesTVC.dinner = ParseOperations.dinnerData.sort({ $0.itemName < $1.itemName})
+            choseFavoritesTVC.lateNight = ParseOperations.lateNightData.sort({ $0.itemName < $1.itemName})
             // These variables are used to check whether data is already present in databse so that we can populate an alert
             choseFavoritesTVC.favoriteBreakfast = self.favoriteBreakfast
             choseFavoritesTVC.favoriteLunch = self.favoriteLunch

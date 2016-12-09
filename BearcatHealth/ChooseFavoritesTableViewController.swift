@@ -67,15 +67,7 @@ class ChooseFavoritesTableViewController:UITableViewController  {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(foodIsHere(_:)), name: "Favorites LateNight Is Served", object: nil)
     }
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.Checkmark
-        if selected {
-            if selectedIndexPath == indexPath.row {
-                tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.None
-                selectedIndexPath = 0
-                selected = false
-            }
-        }
-        selected = true
+        
         if indexPath.section == 0 {
             selectedBreakfastData = breakfast[indexPath.row]
             selectedFavoriteBreakfastData.itemName = selectedBreakfastData.itemName
@@ -228,8 +220,7 @@ class ChooseFavoritesTableViewController:UITableViewController  {
         } else {
             parseOperations.saveFvaoriteBreakfastdata(selectedFavoriteBreakfastData)
             favbreakfast.append(selectedFavoriteBreakfastData.itemName)
-            sleep(1)
-            performSegueWithIdentifier("addedFavorites", sender: self)
+            displayFavoriteAdded("",message:"\(selectedFavoriteBreakfastData.itemName) is added to favorites")
         }
     }
     func addFavLunch() {
@@ -239,9 +230,9 @@ class ChooseFavoritesTableViewController:UITableViewController  {
         } else {
             parseOperations.saveFvaoriteLunchdata(selectedFavoriteLunchData)
             favLunch.append(selectedFavoriteLunchData.itemName)
-            sleep(1)
+            displayFavoriteAdded("",message:"\(selectedFavoriteLunchData.itemName) is added to favorites")
+            
             performSegueWithIdentifier("addedFavorites", sender: self)
-            parseOperations.saveFvaoriteLunchdata(selectedFavoriteLunchData)
         }
     }
     func addFavDinner() {
@@ -250,9 +241,9 @@ class ChooseFavoritesTableViewController:UITableViewController  {
             return
         } else {
             parseOperations.saveFvaoriteDinnerdata(selectedFavoriteDinnerData)
-            sleep(1)
+            displayFavoriteAdded("",message:"\(selectedFavoriteDinnerData.itemName) is added to favorites")
+            
             favDinner.append(selectedFavoriteDinnerData.itemName)
-            performSegueWithIdentifier("addedFavorites", sender: self)
         }
     }
     func addFavLateNight() {
@@ -261,9 +252,8 @@ class ChooseFavoritesTableViewController:UITableViewController  {
             return
         } else {
             parseOperations.saveFvaoriteLateNightdata(selectedFavoriteLateNightData)
-            sleep(1)
+            displayFavoriteAdded("",message:"\(selectedFavoriteLateNightData.itemName) is added to favorites")
             favLateNight.append(selectedFavoriteLateNightData.itemName)
-            performSegueWithIdentifier("addedFavorites", sender: self)
         }
     }
     func displayAlertWithTitle(title:String, message:String){
@@ -272,6 +262,19 @@ class ChooseFavoritesTableViewController:UITableViewController  {
         alert.addAction(defaultAction)
         if presentedViewController ==  nil{
             self.presentViewController(alert, animated: true, completion: nil)
+        }
+    }
+    func displayFavoriteAdded(title:String , message: String) {
+        
+        let addAlert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        
+        addAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { action in
+            
+            self.performSegueWithIdentifier("addedFavorites", sender: self)
+        }))
+        
+        if presentedViewController ==  nil{
+            self.presentViewController(addAlert, animated: true, completion: nil)
         }
     }
 }

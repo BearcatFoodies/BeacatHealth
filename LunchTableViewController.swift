@@ -52,11 +52,10 @@ class LunchTableViewController: UITableViewController {
         return cell
     }
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.Checkmark
-        selectedLunch = foodInfo[indexPath.row]
+               selectedLunch = foodInfo[indexPath.row]
     }
     override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.None
+      
         selectedLunch = FoodData()
     }
     @IBAction func addCalories(sender: UIBarButtonItem) {

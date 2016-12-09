@@ -9,7 +9,7 @@ import UIKit
 import Parse
 import Bolts
 
-// It allows the user to reset their password incase if the user forgets his password. It sends an email to the registered email address to reset the password.  
+// It allows the user to reset their password incase if the user forgets his password. It sends an email to the registered email address to reset the password.
 class ForgotPasswordViewController: UIViewController {
     
     @IBOutlet weak var emailIdTF: UITextField!
