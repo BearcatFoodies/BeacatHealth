@@ -13,6 +13,7 @@
 		4D23AE641DDA19410079AE50 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D23AE631DDA19410079AE50 /* LoginViewController.swift */; };
 		4D4BBDC21DA83A820045C143 /* LunchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4BBDC11DA83A820045C143 /* LunchTableViewController.swift */; };
 		4D4CF07C1DF5216400CB2749 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4CF07B1DF5216400CB2749 /* ForgotPasswordViewController.swift */; };
+		4D55B6B81DFA61F9000BED42 /* sampleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D55B6B71DFA61F9000BED42 /* sampleTableViewController.swift */; };
 		4D5B32A51DDAA54A002FD600 /* Aqua-Gradient-iphone-4s-wallpaper-ilikewallpaper_com.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4D5B32A41DDAA54A002FD600 /* Aqua-Gradient-iphone-4s-wallpaper-ilikewallpaper_com.jpg */; };
 		4D5B32A71DDAA6DA002FD600 /* dining.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4D5B32A61DDAA6DA002FD600 /* dining.jpg */; };
 		4D6FCD9D1DD2ACEA00B708F0 /* ParseOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6FCD9C1DD2ACEA00B708F0 /* ParseOperations.swift */; };
@@ -82,6 +83,7 @@
 		4D23AE631DDA19410079AE50 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4D4BBDC11DA83A820045C143 /* LunchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LunchTableViewController.swift; path = ../LunchTableViewController.swift; sourceTree = "<group>"; };
 		4D4CF07B1DF5216400CB2749 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ForgotPasswordViewController.swift; path = ../ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		4D55B6B71DFA61F9000BED42 /* sampleTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sampleTableViewController.swift; sourceTree = "<group>"; };
 		4D5B32A41DDAA54A002FD600 /* Aqua-Gradient-iphone-4s-wallpaper-ilikewallpaper_com.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Aqua-Gradient-iphone-4s-wallpaper-ilikewallpaper_com.jpg"; path = "BearcatHealth/Aqua-Gradient-iphone-4s-wallpaper-ilikewallpaper_com.jpg"; sourceTree = "<group>"; };
 		4D5B32A61DDAA6DA002FD600 /* dining.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = dining.jpg; path = BearcatHealth/dining.jpg; sourceTree = "<group>"; };
 		4D6FCD9C1DD2ACEA00B708F0 /* ParseOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseOperations.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 		5C7185191DA70DA900A3CAE0 = {
 			isa = PBXGroup;
 			children = (
+				4D55B6B71DFA61F9000BED42 /* sampleTableViewController.swift */,
 				5CAE663E1DF0F7E00020CC9B /* Charts.framework */,
 				4DC051CF1DF0E7BA00079078 /* Charts.framework */,
 				4DE929B81DC03D39000F39CA /* Frameworks */,
@@ -624,6 +627,7 @@
 				4DB26EC81DDD50FC00828279 /* CaloriesData.swift in Sources */,
 				5C7185281DA70DA900A3CAE0 /* MenuViewController.swift in Sources */,
 				4DFD5F021DA721F50053291A /* BreakfastTableViewController.swift in Sources */,
+				4D55B6B81DFA61F9000BED42 /* sampleTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

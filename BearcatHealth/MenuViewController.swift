@@ -8,6 +8,7 @@
 import UIKit
 import Parse
 class MenuViewController: UIViewController {
+    // MARK: - Properties
     // This property allows us to share app delgate class data
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
    // Created implicitly unwrapped optional for parase opeartions class
@@ -53,18 +54,9 @@ class MenuViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(dinnerCaloriesHere(_:)), name: "User dinner calories retrived", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(lateNightCaloriesHere(_:)), name: "User latenight calories retrived", object: nil)
     }
-  
-    // This method stores the user details. And calls calorie intake method
-    func userDetails(notification:NSNotification){
-        for user in parseOperations.user {
-            self.user = user
-            appDelegate.user = self.user
-        }
-        MenuViewController.userscount = parseOperations.user.count
-        if parseOperations.user.count > 0 {
-            calorieIntake()
-        }
-    }
+    
+    
+    // MARK: - Notification methods
     // This notification method adds the breakfast intake calories once data is fetched from parse database.
     func breakfastCaloriesHere(notification:NSNotification){
         MenuViewController.breakfastIntakeCalories = parseOperations.breakfastIntake
@@ -93,6 +85,7 @@ class MenuViewController: UIViewController {
             appDelegate.lateNightIntakeCalories += calori.calories
         }
     }
+     // MARK: - Calorie intake calculation
     // Below method calculates calories supposed to be consumed based on the user profile(BMI)
     func calorieIntake () {
         var calories = 0.0
@@ -118,6 +111,18 @@ class MenuViewController: UIViewController {
         }
         appDelegate.calorie = calories
     }
+    // This method stores the user details. And calls calorie intake method
+    func userDetails(notification:NSNotification){
+        for user in parseOperations.user {
+            self.user = user
+            appDelegate.user = self.user
+        }
+        MenuViewController.userscount = parseOperations.user.count
+        if parseOperations.user.count > 0 {
+            calorieIntake()
+        }
+    }
+    // MARK: - Navigation
     //Below segue method presents different view controllers based different segue identifies
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
@@ -139,6 +144,7 @@ class MenuViewController: UIViewController {
             lateNightTVC.foodInfo = ParseOperations.lateNightData.sort({ $0.itemName < $1.itemName})
             lateNightTVC.lateNightIntakeCalories = parseOperations.dinnerIntake        }
     }
+     // MARK: - Alerts
     // Below method populates alert
     func displayAlertWithTitle(title:String, message:String) {
         let uiAlertController:UIAlertController = UIAlertController(title: title,
