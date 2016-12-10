@@ -1,0 +1,6 @@
+framework module Pods_BearcatHealthUITests {
+  umbrella header "Pods-BearcatHealthUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
