@@ -15,10 +15,8 @@ class ForgotPasswordViewController: UIViewController {
     // An outlet for email id text field
     @IBOutlet weak var emailIdTF: UITextField!
     // Below method dismiss the view controller
-    @IBAction func closeFgtPwdBTN(sender: AnyObject) {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-     // MARK: - Default methods
+    
+    // MARK: - Default methods
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "hotel-dining.jpg")!)
@@ -28,7 +26,7 @@ class ForgotPasswordViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    // MARK: - reset password method
+    // MARK: - reset password
     // Function that allows the user to reset his/her password by sending a email to the registered email address
     @IBAction func resetPwdBTN(sender: AnyObject) {
         if emailIdTF.text!.isEmpty{
@@ -59,6 +57,9 @@ class ForgotPasswordViewController: UIViewController {
         let alert = UIAlertController (title: "Password Reset", message: "An email has been sent to" + email + "to reset your password", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
+    }
+    @IBAction func closeFgtPwdBTN(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
     }
     // MARK: - Alert
     // Function to display the error message

@@ -16,7 +16,7 @@ class LoginViewController: UIViewController{
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     // This variable is created to use Appdelegate data
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    // This is the outlet for username 
+    // This is the outlet for username
     @IBOutlet weak var userNameTF: UITextField!
     // An outlet for password text field
     @IBOutlet weak var passwordTF: UITextField!

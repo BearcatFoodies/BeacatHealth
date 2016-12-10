@@ -46,7 +46,7 @@ class ChooseFavoritesTableViewController:UITableViewController  {
     var favLunch:[String] = []
     var favDinner : [String] = []
     var favLateNight: [String] = []
-    // MARK: - default methods
+    // MARK: - Default methods
     override func viewDidLoad() {
         parseOperations = ParseOperations()
         super.viewDidLoad()

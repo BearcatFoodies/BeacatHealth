@@ -26,7 +26,7 @@ class CalorieViewController: UIViewController, ChartViewDelegate {
     var user:Profile!
     // This property allows us to share the appdelegate class
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-     // MARK: - Default methoods
+    // MARK: - Default methoods
     override func viewDidLoad() {
         intake = [appDelegate.breakfastIntakeCalories,appDelegate.lunchIntakeCalories,appDelegate.dinnerIntakeCalories,appDelegate.lateNightIntakeCalories]
         setChart(mealType,intake:intake)

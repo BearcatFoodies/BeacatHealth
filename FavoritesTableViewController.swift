@@ -40,7 +40,7 @@ class FavoritesTableViewController: UITableViewController {
     var selectedFavoriteLateNightIntake:FavoritesData = FavoritesData()
     // An outlet for favorites table view
     @IBOutlet var favoritesTableView: UITableView!
-    // MARK: - default methods
+    // MARK: - Default methods
     override func viewDidLoad() {
         parseOperations = ParseOperations()
         // fetch Data from favorites table

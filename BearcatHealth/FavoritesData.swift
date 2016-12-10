@@ -9,6 +9,7 @@
 import Foundation
 import Parse
 import Bolts
+// Model class for Favorites table
 class FavoritesData:PFObject , PFSubclassing {
     @NSManaged var itemName: String
     @NSManaged var dayServed: String

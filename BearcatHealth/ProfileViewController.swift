@@ -9,8 +9,9 @@ import Parse
 import Bolts
 //This view controller gets the data from profile view and stores them in profile table
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
-   // An outlet for name label
-    @IBOutlet weak var name: UILabel!
+    // MARK: - Properties
+    // An outlet for name label
+    @IBOutlet weak var nameLBL: UILabel!
     // An outlet for activity indicator
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     // An outlet for height picker view
@@ -37,26 +38,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     var weightArray:[Int] = []
     // Holds the values of activity values for activity picker view
     var activityArray:[String] = ["Light Activity", "Moderate Activity", "Heavy Activity"]
-     // Holds the values of age values for age picker view
+    // Holds the values of age values for age picker view
     var ageArray:[Int] = []
-    // MARK: - Default methods
-    override func viewWillAppear(animated: Bool) {
-        activityIndicator.hidden = true
-        name.text = "Hello, " + appDelegate.userName
-        if MenuViewController.userscount > 0 {
-            self.activityTF.text = appDelegate.user.activity
-            self.ageTF.text = String(appDelegate.user.age)
-            self.heightTF.text = appDelegate.user.height
-            self.weightTF.text = appDelegate.user.weight
-            self.genderTF.text = appDelegate.user.gender
-        }
-    }
-    @IBAction func uploadPhotoBTN(sender: AnyObject) {
-        let imagePC = UIImagePickerController()
-        imagePC.delegate=self
-        imagePC.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        self.presentViewController(imagePC, animated: true, completion: nil)
-    }
     // this field gets the bearcatID entered by the user
     @IBOutlet weak var sidTF: UITextField!
     // this field gets the height entered by the user
@@ -70,6 +53,41 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     // this field gets the activity entered by the user
     @IBOutlet weak var activityTF: UITextField!
     // This method stores the data which was retrived from the profile view.
+    // MARK: - Default methods
+    override func viewWillAppear(animated: Bool) {
+        activityIndicator.hidden = true
+        nameLBL.text = "Hello, " + appDelegate.userName
+        if MenuViewController.userscount > 0 {
+            self.activityTF.text = appDelegate.user.activity
+            self.ageTF.text = String(appDelegate.user.age)
+            self.heightTF.text = appDelegate.user.height
+            self.weightTF.text = appDelegate.user.weight
+            self.genderTF.text = appDelegate.user.gender
+        }
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "hotel-dining.jpg")!)
+        self.heightPV.hidden = true
+        self.weightPV.hidden = true
+        self.genderPV.hidden = true
+        self.activityPV.hidden = true
+        self.agePV.hidden = true
+        for data in 55...1000 {
+            weightArray.append(data)
+        }
+        for data in 55...215 {
+            heightArray.append(data)
+        }
+        for data in 10...100{
+            ageArray.append(data)
+        }
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    // MARK: - Save button
+    //This method validates input data provided and if data is validated properly it will be saved into database
     @IBAction func saveDataBtn(sender: AnyObject) {
         if heightTF.text!.isEmpty || weightTF.text!.isEmpty || genderTF.text!.isEmpty  || ageTF.text!.isEmpty || activityTF.text!.isEmpty {
             self.displayAlertWithTitle("", message:"Please provide All the details")
@@ -131,13 +149,43 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             }
         })
     }
+    // MARK: - Calorie calculation
+    // Calculates supposed calorie intake by the user based on the user profile
+    func calorieIntake() {
+        var calories = 0.0
+        let weight: Double = Double(weightTF.text!)!
+        let height: Double = Double(heightTF.text!)!
+        let age: Double = Double(ageTF.text!)!
+        if genderTF.text == "Male" {
+            if activityTF.text == "Light Activity" {
+                calories = (10*weight + 6.25*height - 5*age + 5) * 1.375
+            }else if activityTF.text == "Moderate Activity" {
+                calories = (10*weight + 6.25*height - 5*age + 5) * 1.55
+            } else if activityTF.text == "Heavy Activity"{
+                calories = (10*weight + 6.25*height - 5*age + 5) * 1.95
+            }
+        } else if genderTF.text == "Female" {
+            if activityTF.text == "Light Activity" {
+                calories = (10*weight + 6.25*height - 5*age - 161) * 1.375
+            }else if activityTF.text == "Moderate Activity" {
+                calories = (10*weight + 6.25*height - 5*age - 161) * 1.55
+            } else if activityTF.text == "Heavy Activity"{
+                calories = (10*weight + 6.25*height - 5*age - 161) * 1.95
+            }
+        }
+        appDelegate.calorie = calories
+    }
+    // MARK: - Picker views
+    // This handles the imager picker view controller
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         profilePhotoIV.image = info[UIImagePickerControllerOriginalImage] as? UIImage
         self.dismissViewControllerAnimated(true , completion: nil)
     }
+    // Sets the number of components in picker view
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }
+    // Sets the number of values for each picker view
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         var numRows : Int = 0
         if pickerView == heightPV {
@@ -157,6 +205,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
         return numRows
     }
+    // Sets the title for each row in the picker view
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         var rowTitle:String = ""
         if pickerView == heightPV {
@@ -181,6 +230,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
         return ""
     }
+    // this method assigns data to text field if a picker view is selected
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == heightPV{
             heightTF.text = String(heightArray[row])
@@ -203,48 +253,12 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             self.agePV.hidden = true
         }
     }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "hotel-dining.jpg")!)
-        self.heightPV.hidden = true
-        self.weightPV.hidden = true
-        self.genderPV.hidden = true
-        self.activityPV.hidden = true
-        self.agePV.hidden = true
-        for data in 55...1000 {
-            weightArray.append(data)
-        }
-        for data in 55...215 {
-            heightArray.append(data)
-        }
-        for data in 10...100{
-            ageArray.append(data)
-        }
-    }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    func textFieldShouldBeginEditing(textField: UITextField)  {
-        if textField  == self.weightTF {
-            self.weightPV.hidden = false
-        }
-        if textField == self.heightTF {
-            self.heightPV.hidden = false
-        }
-        if textField == self.genderTF {
-            self.genderPV.hidden = false
-        }
-        if textField == self.activityTF {
-            self.activityPV.hidden = false
-        }
-        if textField == self.ageTF {
-            self.agePV.hidden = false
-        }
-    }
+    // This method keeps track screen taps
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?){
         view.endEditing(true)
         super.touchesBegan(touches, withEvent: event)
     }
+    // This method hides picker view drop down once it is unselected
     @IBAction func disablePickeViews(tapGR:UITapGestureRecognizer) -> Void{
         weightPV.hidden=true
         heightPV.hidden = true
@@ -252,34 +266,19 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         activityPV.hidden = true
         agePV.hidden = true
     }
+    // Ths method allows to upload photo
+    @IBAction func uploadPhotoBTN(sender: AnyObject) {
+        let imagePC = UIImagePickerController()
+        imagePC.delegate=self
+        imagePC.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        self.presentViewController(imagePC, animated: true, completion: nil)
+    }
+    // MARK: - Alerts
+    // alerts
     func displayAlertWithTitle(title:String, message:String){
         let alert:UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         let defaultAction:UIAlertAction =  UIAlertAction(title: "OK", style: .Default, handler: nil)
         alert.addAction(defaultAction)
         self.presentViewController(alert, animated: true, completion: nil)
-    }
-    func calorieIntake() {
-        var calories = 0.0
-        let weight: Double = Double(weightTF.text!)!
-        let height: Double = Double(heightTF.text!)!
-        let age: Double = Double(ageTF.text!)!
-        if genderTF.text == "Male" {
-            if activityTF.text == "Light Activity" {
-                calories = (10*weight + 6.25*height - 5*age + 5) * 1.375
-            }else if activityTF.text == "Moderate Activity" {
-                calories = (10*weight + 6.25*height - 5*age + 5) * 1.55
-            } else if activityTF.text == "Heavy Activity"{
-                calories = (10*weight + 6.25*height - 5*age + 5) * 1.95
-            }
-        } else if genderTF.text == "Female" {
-            if activityTF.text == "Light Activity" {
-                calories = (10*weight + 6.25*height - 5*age - 161) * 1.375
-            }else if activityTF.text == "Moderate Activity" {
-                calories = (10*weight + 6.25*height - 5*age - 161) * 1.55
-            } else if activityTF.text == "Heavy Activity"{
-                calories = (10*weight + 6.25*height - 5*age - 161) * 1.95
-            }
-        }
-        appDelegate.calorie = calories
     }
 }

@@ -9,7 +9,7 @@
 import Foundation
 import Parse
 import Bolts
-// A simple part of the model
+// Model class for profile table
 class Profile:PFObject , PFSubclassing{
     @NSManaged var sid: String
     @NSManaged var height: String

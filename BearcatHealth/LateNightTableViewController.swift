@@ -18,7 +18,7 @@ class LateNightTableViewController: UITableViewController {
     let dishCalories = 102
     //It holds selected latenight information
     var selectedLateNight = FoodData()
-     // A property which allows us to access Appdelegate data
+    // A property which allows us to access Appdelegate data
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     let parseOperations = ParseOperations()
     var lateNightIntakeCalories:[CaloriesData] = []

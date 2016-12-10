@@ -11,12 +11,12 @@ import Parse
 import Bolts
 // This class allows a new user to register
 class RegisterViewController: UIViewController {
-    
+    // MARK: - Properties
     // This is the outlet for firstname text field and holds firstname
     @IBOutlet weak var firstNameTF: UITextField!
-  // This is the outlet for lastname text field and holds lastname
+    // This is the outlet for lastname text field and holds lastname
     @IBOutlet weak var lastNameTF: UITextField!
-   // This is the outlet for username text field and holds username
+    // This is the outlet for username text field and holds username
     @IBOutlet weak var userNameTF: UITextField!
     // This is the outlet for email id text field and holds email id
     @IBOutlet weak var emailIdTF: UITextField!
@@ -24,7 +24,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var passwordTF: UITextField!
     // This is the outlet for confirm password text field and holds confirm password
     @IBOutlet weak var confirmPasswordTF: UITextField!
-
+    // MARK: - Register
     // This method provides the functionality for registerbutton. It validates all the inputs provided in various text fields if all inputs are propere user is registered in database
     @IBAction func registerBTN(sender: UIButton) {
         let user = PFUser()
@@ -124,6 +124,18 @@ class RegisterViewController: UIViewController {
     func onSuccess() {
         displayAlertWithTitle("Success", message:"Registration Successful")
     }
+    @IBAction func cancelBTN(sender: AnyObject) {
+    }
+    // Populates the alert for error. Presents the alert view controller for different types of errors
+    // MARK: - Alerts
+    func displayAlertControllerWithTitleforFailure(title:String, message:String){
+        let alert:UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        let defaultAction:UIAlertAction =  UIAlertAction(title: "OK", style: .Default, handler: nil)
+        alert.addAction(defaultAction)
+        if presentedViewController ==  nil{
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+    }
     // Populates the alert. Presents the alert view controller for different types of alerts
     func displayAlertWithTitle(title:String, message:String) {
         let uiAlertController:UIAlertController = UIAlertController(title: title,
@@ -134,20 +146,8 @@ class RegisterViewController: UIViewController {
             self.presentViewController(uiAlertController, animated: true, completion: nil)
         }
     }
-    // Populates the alert for error. Presents the alert view controller for different types of errors
-
-    func displayAlertControllerWithTitleforFailure(title:String, message:String){
-        let alert:UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        let defaultAction:UIAlertAction =  UIAlertAction(title: "OK", style: .Default, handler: nil)
-        alert.addAction(defaultAction)
-        if presentedViewController ==  nil{
-            self.presentViewController(alert, animated: true, completion: nil)
-        }
-    }
     // Method for cancel button in register view controller
-    @IBAction func cancelBTN(sender: AnyObject) {
-    }
-    
+    // MARK: - Default methods
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "hotel-dining.jpg")!)

@@ -9,7 +9,7 @@
 import Foundation
 import Parse
 import Bolts
-// A simple part of the model
+// Model class for Fooddata table
 class FoodData:PFObject , PFSubclassing{
     @NSManaged var itemName: String
     @NSManaged var dayServed: String

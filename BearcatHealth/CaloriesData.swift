@@ -9,6 +9,7 @@
 import Foundation
 import Parse
 import Bolts
+// Model class for Calories table
 class CaloriesData:PFObject , PFSubclassing {
     @NSManaged var itemName: String
     @NSManaged var dayServed: String

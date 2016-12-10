@@ -17,6 +17,7 @@
 		4D5B32A71DDAA6DA002FD600 /* dining.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4D5B32A61DDAA6DA002FD600 /* dining.jpg */; };
 		4D6FCD9D1DD2ACEA00B708F0 /* ParseOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6FCD9C1DD2ACEA00B708F0 /* ParseOperations.swift */; };
 		4D70759F1DD168D1006B05D1 /* FavoritesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D70759E1DD168D1006B05D1 /* FavoritesData.swift */; };
+		4D74DC9D1DFBA06800313471 /* launchScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D74DC9C1DFBA06800313471 /* launchScreen.png */; };
 		4D9C7BDD1DBEC111009368A0 /* Clock-25.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D9C7BD91DBEC111009368A0 /* Clock-25.png */; };
 		4D9C7BDE1DBEC111009368A0 /* Fire Element-25.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D9C7BDA1DBEC111009368A0 /* Fire Element-25.png */; };
 		4D9C7BDF1DBEC111009368A0 /* Star-25.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D9C7BDB1DBEC111009368A0 /* Star-25.png */; };
@@ -27,7 +28,6 @@
 		4DE3677B1DA8437300A82599 /* DinnerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE3677A1DA8437300A82599 /* DinnerTableViewController.swift */; };
 		4DE367A71DA859AB00A82599 /* LateNightTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE367A61DA859AB00A82599 /* LateNightTableViewController.swift */; };
 		4DE706901DECBD2100D584B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DE7068F1DECBD2100D584B6 /* Main.storyboard */; };
-		4DE8ED571DF50B5300A3FACE /* Bearcats.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4DE8ED561DF50B5300A3FACE /* Bearcats.jpg */; };
 		4DE929951DC0215B000F39CA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DE929941DC0215B000F39CA /* CoreData.framework */; };
 		4DE929971DC02162000F39CA /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DE929961DC02162000F39CA /* AudioToolbox.framework */; };
 		4DE929991DC02171000F39CA /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DE929981DC02171000F39CA /* CFNetwork.framework */; };
@@ -86,6 +86,7 @@
 		4D5B32A61DDAA6DA002FD600 /* dining.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = dining.jpg; path = BearcatHealth/dining.jpg; sourceTree = "<group>"; };
 		4D6FCD9C1DD2ACEA00B708F0 /* ParseOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseOperations.swift; sourceTree = "<group>"; };
 		4D70759E1DD168D1006B05D1 /* FavoritesData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesData.swift; sourceTree = "<group>"; };
+		4D74DC9C1DFBA06800313471 /* launchScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launchScreen.png; sourceTree = "<group>"; };
 		4D9C7BD91DBEC111009368A0 /* Clock-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Clock-25.png"; path = "BearcatHealth/Clock-25.png"; sourceTree = "<group>"; };
 		4D9C7BDA1DBEC111009368A0 /* Fire Element-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Fire Element-25.png"; path = "BearcatHealth/Fire Element-25.png"; sourceTree = "<group>"; };
 		4D9C7BDB1DBEC111009368A0 /* Star-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Star-25.png"; path = "BearcatHealth/Star-25.png"; sourceTree = "<group>"; };
@@ -97,7 +98,6 @@
 		4DE3677A1DA8437300A82599 /* DinnerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DinnerTableViewController.swift; sourceTree = "<group>"; };
 		4DE367A61DA859AB00A82599 /* LateNightTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LateNightTableViewController.swift; sourceTree = "<group>"; };
 		4DE7068F1DECBD2100D584B6 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		4DE8ED561DF50B5300A3FACE /* Bearcats.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Bearcats.jpg; path = BearcatHealth/Bearcats.jpg; sourceTree = "<group>"; };
 		4DE929941DC0215B000F39CA /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		4DE929961DC02162000F39CA /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		4DE929981DC02171000F39CA /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -196,9 +196,9 @@
 		4D55B6B51DFA291B000BED42 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				4D74DC9C1DFBA06800313471 /* launchScreen.png */,
 				4D5B32A41DDAA54A002FD600 /* Aqua-Gradient-iphone-4s-wallpaper-ilikewallpaper_com.jpg */,
 				4D9C7BD91DBEC111009368A0 /* Clock-25.png */,
-				4DE8ED561DF50B5300A3FACE /* Bearcats.jpg */,
 				4D9C7BDA1DBEC111009368A0 /* Fire Element-25.png */,
 				4D1AFF331DDAC00000D51BF4 /* hotel-dining.jpg */,
 				4D5B32A61DDAA6DA002FD600 /* dining.jpg */,
@@ -432,11 +432,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D5B32A71DDAA6DA002FD600 /* dining.jpg in Resources */,
+				4D74DC9D1DFBA06800313471 /* launchScreen.png in Resources */,
 				4DE706901DECBD2100D584B6 /* Main.storyboard in Resources */,
 				4D9C7BDE1DBEC111009368A0 /* Fire Element-25.png in Resources */,
 				5C7185321DA70DA900A3CAE0 /* LaunchScreen.storyboard in Resources */,
 				5C71852F1DA70DA900A3CAE0 /* Assets.xcassets in Resources */,
-				4DE8ED571DF50B5300A3FACE /* Bearcats.jpg in Resources */,
 				4D5B32A51DDAA54A002FD600 /* Aqua-Gradient-iphone-4s-wallpaper-ilikewallpaper_com.jpg in Resources */,
 				4D9C7BDF1DBEC111009368A0 /* Star-25.png in Resources */,
 				4D1AFF341DDAC00000D51BF4 /* hotel-dining.jpg in Resources */,
