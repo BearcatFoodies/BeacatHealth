@@ -11,20 +11,24 @@ import Bolts
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Properties
-    var breakfast:[FoodData] = []
-    var lunch:[FoodData] = []
-    var dinner:[FoodData] = []
-    var lateNight : [FoodData] = []
     var window: UIWindow?
+    // Below property is updated whenever user adds the items into calorie intake from breakfast,lunch,dinner,latenight and Favorites tabs
     var calorie = 0.0
+    // Holds the user name
     var userName = ""
+    // Holds the password
     var password = ""
+    // Holds the total break fast intake calories
     var breakfastIntakeCalories = 0
+    // Holds the lunch intake calories
     var lunchIntakeCalories = 0
+    // Holds the dinner intake calories
     var dinnerIntakeCalories = 0
+    // Holds latenight intake calories
     var lateNightIntakeCalories = 0
+    // Ite stores the user details and can be accessed across all view controllers
     var user:Profile!
-    let parseOperations = ParseOperations()
+
     //MARK: - Methods
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
