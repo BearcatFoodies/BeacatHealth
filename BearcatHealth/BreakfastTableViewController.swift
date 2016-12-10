@@ -2,7 +2,7 @@
 //  BreakfastTableViewController.swift
 //  BearcatHealth
 //
-//  Created by Pachipulusu,Venkatakotianilkumar on 10/6/16.
+//  Created by Gayam,Prathibha on 10/6/16.
 //  Copyright © 2016 Gayam,Prathibha. All rights reserved.
 //
 
@@ -16,9 +16,9 @@ class BreakfastTableViewController: UITableViewController {
     @IBOutlet var breakfastTableView: UITableView!
     // it stores the breakfast items
     static var breakfastItems:[String] = []
-    // A property wi=hich allows us to access appdelegate data
+    // A property wi=hich allows us to access Appdelegate data
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    // An object which holds the selected breakfast
+    // An object which holds the selected breakfast so that it can be added to intake calories
     var selectedBreakfast : FoodData = FoodData()
     // An object for paraseoperations class
     let parseOperations = ParseOperations()
@@ -26,7 +26,6 @@ class BreakfastTableViewController: UITableViewController {
     var  breakfastIntakeCalories:[CaloriesData] = []
     // this property holds food information
     var foodInfo:[FoodData] = []
-    
     // tag Identifier for tableview cell image label
     let dishImage = 100
     // tag Identifier for tableview cell dish name label

@@ -10,15 +10,24 @@ import UIKit
 import Parse
 import Bolts
 class EditFavoriteTableViewController: UITableViewController {
+    // MARK: - properties
+    // A property which allows us to access Appdelegate data
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    var deleteSection = 0
-    var deleteRow = 0
+    // An outlet for editfavorites table view controller
     @IBOutlet var editFavoritesTVC: UITableView!
+    // An object for parseoperations
     let parseOperations:ParseOperations = ParseOperations()
-    var  favoriteBreakfast:[FavoritesData] = []
+    // Below variables holds user favorite breakfast,lunch,dinner and latenight
+    var favoriteBreakfast:[FavoritesData] = []
     var favoriteLunch:[FavoritesData] = []
     var favoriteDinner:[FavoritesData] = []
     var favoriteLateNight:[FavoritesData] = []
+    // This property holds from which section data need to be deleted
+    var deleteSection = 0
+    // This property holds which row need to be deleted from favorites
+    var deleteRow = 0
+    var deleteSelectedIndexPath: NSIndexPath? = nil
+    // MARK: - Default methoods
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -36,6 +45,12 @@ class EditFavoriteTableViewController: UITableViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(favoritesIsHere(_:)), name: "Favorites Lunch Is Served", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(favoritesIsHere(_:)), name: "Favorites LateNight Is Served", object: nil)
     }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    // MARK: - Notification handler
+    // It reloads table view once favorites data retrieved notification is received
     func favoritesIsHere(notification:NSNotification) {
         self.favoriteBreakfast = parseOperations.favoriteBreakfast
         self.favoriteLunch = parseOperations.favoriteLunch
@@ -43,16 +58,12 @@ class EditFavoriteTableViewController: UITableViewController {
         self.favoriteLateNight = parseOperations.favoriteLateNight
         editFavoritesTVC.reloadData()
     }
-    @IBAction func deleteBTN(sender: UIButton) {
-    }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    // MARK: - Table view methods
     //return the number of sections in a table
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 4
     }
+    // Method sets the size and font of text in the header of a tableview
     override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header = view as! UITableViewHeaderFooterView
         header.textLabel!.textColor = UIColor.blackColor()
@@ -86,9 +97,11 @@ class EditFavoriteTableViewController: UITableViewController {
             }
         }
     }
+    // This method allows to edit tableview cell
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
+    // This method provides delete option for the user if table view cell is swiped
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.Delete) {
             // handles delete (by removing the data from array and updating the tableview)
@@ -113,39 +126,7 @@ class EditFavoriteTableViewController: UITableViewController {
             confirmDelete(favoriteToDelete)
         }
     }
-    func confirmDelete(Favorite: FavoritesData ) {
-        let alert = UIAlertController(title: "Delete Favorite", message: "You want to permanently delete \(Favorite.itemName)? from Favorite list", preferredStyle: .Alert)
-        let DeleteAction = UIAlertAction(title: "Delete", style: .Destructive, handler: handleDeleteFavorite)
-        let CancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: cancelDeleteFavorite)
-        alert.addAction(DeleteAction)
-        alert.addAction(CancelAction)
-        self.presentViewController(alert, animated: true, completion: nil)
-    }
-    var deletePlanetIndexPath: NSIndexPath? = nil
-    func handleDeleteFavorite(alertAction: UIAlertAction!) -> Void {
-        if deleteSection == 0 {
-            parseOperations.deleteFavoriteBreakfast(favoriteBreakfast[deleteRow].itemName , userName: appDelegate.userName)
-            favoriteBreakfast.removeAtIndex(deleteRow)
-            editFavoritesTVC.reloadData()
-        } else if deleteSection == 1 {
-            parseOperations.deleteFavoriteLunch(favoriteLunch[deleteRow].itemName , userName: appDelegate.userName)
-            favoriteLunch.removeAtIndex(deleteRow)
-            editFavoritesTVC.reloadData()
-            
-        } else if deleteSection == 2 {
-            parseOperations.deleteFavoriteDinner(favoriteDinner[deleteRow].itemName , userName: appDelegate.userName)
-            favoriteDinner.removeAtIndex(deleteRow)
-            editFavoritesTVC.reloadData()
-        } else {
-            parseOperations.deleteFavoriteLateNight(favoriteLateNight[deleteRow].itemName , userName: appDelegate.userName)
-            favoriteDinner.removeAtIndex(deleteRow)
-            editFavoritesTVC.reloadData()
-        }
-    }
-    func cancelDeleteFavorite(alertAction: UIAlertAction!) {
-        deletePlanetIndexPath = nil
-        editFavoritesTVC.reloadData()
-    }
+    // Loads data into tableview cell
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Favorites", forIndexPath: indexPath)
         let dishNameLBL:UILabel = cell.viewWithTag(100) as! UILabel
@@ -171,6 +152,7 @@ class EditFavoriteTableViewController: UITableViewController {
         }
         return cell
     }
+    // sets the header for each section
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
             return "Breakfast"
@@ -182,4 +164,41 @@ class EditFavoriteTableViewController: UITableViewController {
             return "Latenight"
         }
     }
+    // MARK: - Swipe delete
+    // Displays an alert to the user if user selcets delete option
+    func confirmDelete(Favorite: FavoritesData ) {
+        let alert = UIAlertController(title: "Delete Favorite", message: "You want to permanently delete \(Favorite.itemName)? from Favorite list", preferredStyle: .Alert)
+        let DeleteAction = UIAlertAction(title: "Delete", style: .Destructive, handler: handleDeleteFavorite)
+        let CancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: cancelDeleteFavorite)
+        alert.addAction(DeleteAction)
+        alert.addAction(CancelAction)
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    // This method deletes the selected item from favorites abnd reloads the table view
+    func handleDeleteFavorite(alertAction: UIAlertAction!) -> Void {
+        if deleteSection == 0 {
+            parseOperations.deleteFavoriteBreakfast(favoriteBreakfast[deleteRow].itemName , userName: appDelegate.userName)
+            favoriteBreakfast.removeAtIndex(deleteRow)
+            editFavoritesTVC.reloadData()
+        } else if deleteSection == 1 {
+            parseOperations.deleteFavoriteLunch(favoriteLunch[deleteRow].itemName , userName: appDelegate.userName)
+            favoriteLunch.removeAtIndex(deleteRow)
+            editFavoritesTVC.reloadData()
+            
+        } else if deleteSection == 2 {
+            parseOperations.deleteFavoriteDinner(favoriteDinner[deleteRow].itemName , userName: appDelegate.userName)
+            favoriteDinner.removeAtIndex(deleteRow)
+            editFavoritesTVC.reloadData()
+        } else {
+            parseOperations.deleteFavoriteLateNight(favoriteLateNight[deleteRow].itemName , userName: appDelegate.userName)
+            favoriteDinner.removeAtIndex(deleteRow)
+            editFavoritesTVC.reloadData()
+        }
+    }
+    // this method resets the selected index to nil if user skips delete option and selects cancel from the alert is displayed to delete favorite
+    func cancelDeleteFavorite(alertAction: UIAlertAction!) {
+        deleteSelectedIndexPath = nil
+        editFavoritesTVC.reloadData()
+    }
+    
 }

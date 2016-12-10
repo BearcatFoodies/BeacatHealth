@@ -2,7 +2,7 @@
 //  LoginViewController.swift
 //  BearcatHealth
 //
-//  Created by Pachipulusu,Venkatakotianilkumar on 11/14/16.
+//  Created by Tarugu,Prudhvi Krishna Subbaiah on 11/14/16.
 //  Copyright © 2016 Gayam,Prathibha. All rights reserved.
 //
 import UIKit
@@ -11,14 +11,16 @@ import Bolts
 
 // This view controller provides the functionality for login view
 class LoginViewController: UIViewController{
-    
+    // MARK: - Properties
     // This is the outlet for activity indicator
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     // This variable is created to use Appdelegate data
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     // This is the outlet for username 
     @IBOutlet weak var userNameTF: UITextField!
+    // An outlet for password text field
     @IBOutlet weak var passwordTF: UITextField!
+    // Handles the user loginwhen user selects login button
     @IBAction func login(sender: UIButton) {
         self.activityIndicatorView.startAnimating()
         appDelegate.userName = userNameTF.text!
@@ -33,16 +35,22 @@ class LoginViewController: UIViewController{
             }
         })
     }
+    // MARK: - Navigation
+    // Unwind segue method redirects back to login and logouts the user from PFUSER
     @IBAction func backToLogin(segue:UIStoryboardSegue){
         appDelegate.user = Profile()
         PFUser.logOut()
     }
+    // Performs the segues operation if login is sucessfull
     func onSuccess() {
         self.performSegueWithIdentifier("success", sender: self)
     }
+    // it displays an alert if login is unsuccessfull
     func onFailure() {
         self.displayAlertWithTitleForError("", message: "Please provide proper username and password combination")
     }
+    // MARK: - Alerts
+    // it displays an alert if login is unsuccessfull
     func displayAlertWithTitleForError(title:String, message:String) {
         let uiAlertController:UIAlertController = UIAlertController(title: title,
                                                                     message: message, preferredStyle: UIAlertControllerStyle.Alert)
@@ -52,6 +60,7 @@ class LoginViewController: UIViewController{
             self.presentViewController(uiAlertController, animated: true, completion: nil)
         }
     }
+    // MARK: - Default methods
     override func viewDidLoad() {
         self.navigationItem.setHidesBackButton(true, animated:true)
         super.viewDidLoad()

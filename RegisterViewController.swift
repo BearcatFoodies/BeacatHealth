@@ -2,7 +2,7 @@
 //  RegisterViewController.swift
 //  BearcatHealth
 //
-//  Created by Pachipulusu,Venkatakotianilkumar on 11/14/16.
+//  Created by Tarugu,Prudhvi Krishna Subbaiah on 11/14/16.
 //  Copyright © 2016 Gayam,Prathibha. All rights reserved.
 //
 

@@ -10,22 +10,24 @@ import Parse
 import Bolts
 //This class describes about the favourites table view controller functionality
 class FavoritesTableViewController: UITableViewController {
-    // Below variables are used to prepare data to choose favorites TVC
-    var selected: Bool = false
-    var selectedIndexPath:Int = 0
+    // MARK: - properties
+    // Below variable allows us to share Appdelegate data in this view controller
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    // An object for paraseoperations class
     var parseOperations = ParseOperations()
     var favoritesData:[FoodData] = []
-    var  breakfastData:[FoodData] = []
+    // Below properties holds entire breakfast,lunch,dinner and latenight menu
+    var breakfastData:[FoodData] = []
     var lunchData:[FoodData] = []
     var dinnerData:[FoodData] = []
     var lateNightData:[FoodData] = []
     //Below variables refer to data received from the choose favorites TVC
-    var  favoriteBreakfast:[FavoritesData] = []
+    var favoriteBreakfast:[FavoritesData] = []
     var favoriteLunch:[FavoritesData] = []
     var favoriteDinner:[FavoritesData] = []
     var favoriteLateNight:[FavoritesData] = []
-    var  retrievedData:[FoodData] = []
+    var retrievedData:[FoodData] = []
+    // Below variables holds added breakfast,lunch,dinner and latenight items
     var addedBreakfastItems:[String] = []
     var addedLunchItems:[String] = []
     var addedDinnerItems:[String] = []
@@ -36,24 +38,27 @@ class FavoritesTableViewController: UITableViewController {
     var selectedFavoriteLunchIntake:FavoritesData = FavoritesData()
     var selectedFavoriteDinnerIntake:FavoritesData = FavoritesData()
     var selectedFavoriteLateNightIntake:FavoritesData = FavoritesData()
+    // An outlet for favorites table view
     @IBOutlet var favoritesTableView: UITableView!
+    // MARK: - default methods
     override func viewDidLoad() {
         parseOperations = ParseOperations()
         // fetch Data from favorites table
         super.viewDidLoad()
     }
+    // It retrieves favorites from database
     override func viewWillAppear(animated: Bool) {
-
         parseOperations.retrieveFavoriteBreakFastMenu(appDelegate.userName)
         parseOperations.retrieveFavoriteLunchMenu(appDelegate.userName)
         parseOperations.retrieveFavoriteDinnerMenu(appDelegate.userName)
         parseOperations.retrieveFavoriteLateNightMenu(appDelegate.userName)
-      
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(favoritesIsHere(_:)), name: "Favorites Dinner Is Served", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(favoritesIsHere(_:)), name: "Favorites Breakfast Is Served", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(favoritesIsHere(_:)), name: "Favorites Lunch Is Served", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(favoritesIsHere(_:)), name: "Favorites LateNight Is Served", object: nil)
     }
+    // MARK: - Notification handler
+    // It reloads table view once favorites data retrieved notification is received
     func favoritesIsHere(notification:NSNotification) {
         self.favoriteBreakfast = parseOperations.favoriteBreakfast.sort({ $0.itemName < $1.itemName})
         self.favoriteLunch = parseOperations.favoriteLunch.sort({ $0.itemName < $1.itemName})
@@ -61,6 +66,7 @@ class FavoritesTableViewController: UITableViewController {
         self.favoriteLateNight = parseOperations.favoriteLateNight.sort({ $0.itemName < $1.itemName})
         favoritesTableView.reloadData()
     }
+    // MARK: - Table view methods
     //return the number of sections in a table
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 4
@@ -93,6 +99,7 @@ class FavoritesTableViewController: UITableViewController {
             }
         }
     }
+    // Loads data into tableview cells
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Favorites", forIndexPath: indexPath)
         let dishNameLBL:UILabel = cell.viewWithTag(100) as! UILabel
@@ -118,29 +125,20 @@ class FavoritesTableViewController: UITableViewController {
         }
         return cell
     }
+    //It gives the selected data from the breakfast,lunch,dinner and latenight sections.
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-       
-
         if indexPath.section == 0 {
             selectedFavoriteBreakfastIntake = favoriteBreakfast[indexPath.row]
         } else if indexPath.section == 1{
             selectedFavoriteLunchIntake = favoriteLunch[indexPath.row]
         } else if indexPath.section == 2 {
             selectedFavoriteDinnerIntake = favoriteDinner[indexPath.row]
-            
         } else {
-            
-            
-            
-            
             selectedFavoriteLateNightIntake = favoriteLateNight[indexPath.row]
-            
         }
     }
-    
+    // it resets the select select breakfast,lunch,dinner and latenight variables once they are deselected from the tableview cell
     override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-     
-        
         if indexPath.section == 0 {
             selectedFavoriteBreakfastIntake = FavoritesData()
         } else if indexPath.section == 1 {
@@ -151,11 +149,37 @@ class FavoritesTableViewController: UITableViewController {
             selectedFavoriteLateNightIntake = FavoritesData()
         }
     }
+    // It sets the title for each section
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "Breakfast"
+        } else if section == 1{
+            return "Lunch"
+        } else if section == 2 {
+            return "Dinner"
+        } else {
+            return "Latenight"
+        }
+    }
+    // Method sets the size and font of text in the header of a tableview
+    override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel!.textColor = UIColor.blackColor()
+        header.textLabel!.font = UIFont(name: "Futura", size: 25)!
+    }
+    // Method sets the height of the header of a tableview
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 61.0
+    }
+    // segue method for cancel favorites
     @IBAction func cancelFavorites(segue:UIStoryboardSegue) {
     }
+    // This segue method reloads favorites table view once save favorites are clicked
     @IBAction func saveFavoritesData(segue:UIStoryboardSegue) {
         favoritesTableView.reloadData()
     }
+    // MARK: - Navigation
+    // This prepare segue method segues to different views based on the segue identifiers
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "chooseFavorites" {
             let choseFavoritesTVC: ChooseFavoritesTableViewController = segue.destinationViewController as! ChooseFavoritesTableViewController
@@ -181,6 +205,8 @@ class FavoritesTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    // MARK: - Calorie addition
+    // This method adds calories in to different calories if user clicks add calories button. It calls breakfast,lunch,dinner and latenight calories addition methods based on the selected intake
     @IBAction func addCalories(sender: UIBarButtonItem) {
         if selectedFavoriteBreakfastIntake.calories == 0 && selectedFavoriteLunchIntake.calories == 0 && selectedFavoriteDinnerIntake.calories == 0 && selectedFavoriteLateNightIntake.calories == 0  {
             displayAlertWithTitle("", message: "Please select at least one item to add calories")
@@ -202,22 +228,7 @@ class FavoritesTableViewController: UITableViewController {
     func favoritesAdded(notification:NSNotification){
         displayAlertWithTitle("", message: "Added to Favorites")
     }
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return "Breakfast"
-        } else if section == 1{
-            return "Lunch"
-        } else if section == 2 {
-            return "Dinner"
-        } else {
-            return "Latenight"
-        }
-    }
-    override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        let header = view as! UITableViewHeaderFooterView
-        header.textLabel!.textColor = UIColor.blackColor()
-        header.textLabel!.font = UIFont(name: "Futura", size: 25)!
-    }
+    // This method adds calories into breakfast intake calories. If the item is already added it will throw an alert for the user about adding it again
     func addBreakfastCalories() {
         let selectCalorieIntake = CaloriesData()
         selectCalorieIntake.itemName = selectedFavoriteBreakfastIntake.itemName
@@ -252,6 +263,7 @@ class FavoritesTableViewController: UITableViewController {
             self.performSegueWithIdentifier("favoriteCalories", sender: self)
         }
     }
+    // This method adds calories into lunch intake calories. If the item is already added it will throw an alert for the user about adding it again
     func addLunchCalories() {
         let selectCalorieIntake = CaloriesData()
         selectCalorieIntake.itemName = selectedFavoriteLunchIntake.itemName
@@ -286,6 +298,7 @@ class FavoritesTableViewController: UITableViewController {
             self.performSegueWithIdentifier("favoriteCalories", sender: self)
         }
     }
+    // This method adds calories into dinner intake calories. If the item is already added it will throw an alert for the user about adding it again
     func addDinnerCalories() {
         let selectCalorieIntake = CaloriesData()
         selectCalorieIntake.itemName = selectedFavoriteDinnerIntake.itemName
@@ -320,6 +333,7 @@ class FavoritesTableViewController: UITableViewController {
             self.performSegueWithIdentifier("favoriteCalories", sender: self)
         }
     }
+    // This method adds calories into latenight intake calories. If the item is already added it will throw an alert for the user about adding it again
     func addlateNightCalories() {
         let selectCalorieIntake = CaloriesData()
         selectCalorieIntake.itemName = selectedFavoriteLateNightIntake.itemName
@@ -354,9 +368,7 @@ class FavoritesTableViewController: UITableViewController {
             self.performSegueWithIdentifier("favoriteCalories", sender: self)
         }
     }
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 61.0
-    }
+    // MARK: - Alert
     func displayAlertWithTitle(title:String, message:String){
         let alert:UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         let defaultAction:UIAlertAction =  UIAlertAction(title: "OK", style: .Default, handler: nil)

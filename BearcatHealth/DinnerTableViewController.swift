@@ -2,32 +2,46 @@
 //  DinnerTableViewController.swift
 //  BearcatHealth
 //
-//  Created by Pachipulusu,Venkatakotianilkumar on 10/7/16.
+//  Created by Gayam,Prathibha on 10/7/16.
 //  Copyright © 2016 Gayam,Prathibha. All rights reserved.
 //
 import UIKit
 class DinnerTableViewController: UITableViewController {
+    // MARK: - properties
+    // A class variable which keeps the track of dinner items
     static var dinnerItems:[String] = []
+    // An object for paraseoperations class
     let parseOperations = ParseOperations()
+    // A property which allows us to access Appdelegate data
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    // It holds dinner data
     var foodInfo:[FoodData] = []
+    // Tag variable for image label in the table view cell
     let dishImage = 100
+    //Tag variable for dish name label in the table view cell
     let dishName = 101
+    //Tag variable for calories label in the table view cell
     let dishCalories = 102
+    //It holds selected dinner information
     var selectedDinner = FoodData()
+    // It holds dinner intake calories
     var dinnerIntakeCalories:[CaloriesData] = []
+    // MARK: - Default methods
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Dinner"
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(dinnerIsHere(_:)), name: "Dinner Is Served", object: nil)
     }
-    func dinnerIsHere(notification:NSNotification){
-        self.tableView.reloadData()
-    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    // MARK: - Notification handler
+    // It reloads table view once dinner data retrieved notification is received
+    func dinnerIsHere(notification:NSNotification){
+        self.tableView.reloadData()
+    }
+    // MARK: - Table view data source
     //return the number of sections in a table
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -40,6 +54,7 @@ class DinnerTableViewController: UITableViewController {
             return foodInfo.count
         }
     }
+    // Loads the data into table view cell
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Dinner", forIndexPath: indexPath)
         let dishNameLBL:UILabel = cell.viewWithTag(dishName) as! UILabel
@@ -50,13 +65,17 @@ class DinnerTableViewController: UITableViewController {
         dishIV.image = UIImage(named:"\(self.foodInfo[indexPath.row].itemName).jpg")
         return cell
     }
+    //It sets data into selected dinner if an item is selected
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-      
+        
         selectedDinner = foodInfo[indexPath.row]
     }
+    //It resets data if selected dinner cell is deselected
     override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-           selectedDinner = FoodData()
+        selectedDinner = FoodData()
     }
+    // MARK: - Calorie addition
+    // This method adds calories in to dinner calories if user clicks add calories button
     @IBAction func addCalories(sender: UIBarButtonItem) {
         let selectedIntake = CaloriesData()
         selectedIntake.itemName = selectedDinner.itemName
@@ -99,7 +118,7 @@ class DinnerTableViewController: UITableViewController {
             self.performSegueWithIdentifier("dinnerCalories", sender: self)
         }
     }
-    
+    // MARK: - Alert
     func displayAlertWithTitle(title:String, message:String){
         let alert:UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         let defaultAction:UIAlertAction =  UIAlertAction(title: "OK", style: .Default, handler: nil)

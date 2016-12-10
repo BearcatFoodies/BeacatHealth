@@ -10,7 +10,8 @@ import Parse
 import Bolts
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    var  breakfast:[FoodData] = []
+    // MARK: - Properties
+    var breakfast:[FoodData] = []
     var lunch:[FoodData] = []
     var dinner:[FoodData] = []
     var lateNight : [FoodData] = []
@@ -18,13 +19,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var calorie = 0.0
     var userName = ""
     var password = ""
-    var  breakfastIntakeCalories = 0
+    var breakfastIntakeCalories = 0
     var lunchIntakeCalories = 0
     var dinnerIntakeCalories = 0
     var lateNightIntakeCalories = 0
     var user:Profile!
-    //var logindetails = LoginViewController()
     let parseOperations = ParseOperations()
+    //MARK: - Methods
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         Profile.registerSubclass()

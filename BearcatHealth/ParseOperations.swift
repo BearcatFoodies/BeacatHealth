@@ -4,28 +4,30 @@
 //
 //  Created by Pachipulusu,Venkatakotianilkumar on 11/8/16.
 //  Copyright © 2016 Gayam,Prathibha. All rights reserved.
-// This class contains code for various data operations
+//  This class contains code for various database operations
 import UIKit
 import Bolts
 import Parse
 class ParseOperations {
+    // MARK: - Properties
     // Data for breakfast,lunch,dinner and latenight view controllers
     static var breakfastData:[FoodData] = []
-    static  var lunchData:[FoodData] = []
+    static var lunchData:[FoodData] = []
     static var dinnerData:[FoodData] = []
     static var lateNightData:[FoodData] = []
     var user : [Profile] = []
     // Data for favorites view controller
-    var  favoriteBreakfast:[FavoritesData] = []
+    var favoriteBreakfast:[FavoritesData] = []
     var favoriteLunch:[FavoritesData] = []
     var favoriteDinner:[FavoritesData] = []
     var favoriteLateNight:[FavoritesData] = []
     // Calori Intake Variables
-    var  breakfastIntake:[CaloriesData] = []
+    var breakfastIntake:[CaloriesData] = []
     var lunchIntake:[CaloriesData] = []
     var dinnerIntake:[CaloriesData] = []
     var lateNightIntake:[CaloriesData] = []
-    // Retrives data from Food data table and if it is breakfast
+    // MARK: - Database operations(Methods)
+    // Retrieves data from Food data table and if it is breakfast
     static func retrieveBreakFastMenu(){
         let query = PFQuery(className:"FoodData")
         query.whereKey("mealType", equalTo:"Breakfast")
@@ -237,7 +239,7 @@ class ParseOperations {
         })
     }
     //Allows us to retrieve the number of calories consumed in breakfast
-    func retriveBreakfastCalorieIntake(userName:String) {
+    func retrieveBreakfastCalorieIntake(userName:String) {
         let query = PFQuery(className: "CaloriesData")
         query.whereKey("sid", equalTo: userName)
         query.whereKey("mealType", equalTo:"Breakfast")
@@ -250,7 +252,7 @@ class ParseOperations {
         }
     }
     //Allows us to retrieve the number of calories consumed in lunch
-    func retriveLunchCalorieIntake(userName:String) {
+    func retrieveLunchCalorieIntake(userName:String) {
         let query = PFQuery(className: "CaloriesData")
         query.whereKey("sid", equalTo: userName)
         query.whereKey("mealType", equalTo:"Lunch")
@@ -263,7 +265,7 @@ class ParseOperations {
         }
     }
     //Allows us to retrieve the number of calories consumed in dinner
-    func retriveDinnerCalorieIntake(userName:String) {
+    func retrieveDinnerCalorieIntake(userName:String) {
         let query = PFQuery(className: "CaloriesData")
         query.whereKey("sid", equalTo: userName)
         query.whereKey("mealType", equalTo:"Dinner")
@@ -276,7 +278,7 @@ class ParseOperations {
         }
     }
     //Allows us to retrieve the number of calories consumed in late night
-    func retriveLateNightCalorieIntake(userName:String) {
+    func retrieveLateNightCalorieIntake(userName:String) {
         let query = PFQuery(className: "CaloriesData")
         query.whereKey("sid", equalTo: userName)
         query.whereKey("mealType", equalTo:"Late Night")

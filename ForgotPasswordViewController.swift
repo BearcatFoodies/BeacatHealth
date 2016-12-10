@@ -2,7 +2,7 @@
 //  ForgotPasswordViewController.swift
 //  BearcatHealth
 //
-//  Created by Pachipulusu,Venkatakotianilkumar on 12/4/16.
+//  Created by Tarugu,Prudhvi Krishna Subbaiah on 12/4/16.
 //  Copyright © 2016 Gayam,Prathibha. All rights reserved.
 //
 import UIKit
@@ -11,22 +11,24 @@ import Bolts
 
 // It allows the user to reset their password incase if the user forgets his password. It sends an email to the registered email address to reset the password.
 class ForgotPasswordViewController: UIViewController {
-    
+    // MARK: - Properties
+    // An outlet for email id text field
     @IBOutlet weak var emailIdTF: UITextField!
+    // Below method dismiss the view controller
     @IBAction func closeFgtPwdBTN(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
-    
+     // MARK: - Default methods
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "hotel-dining.jpg")!)
         // Do any additional setup after loading the view.
     }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    // MARK: - reset password method
     // Function that allows the user to reset his/her password by sending a email to the registered email address
     @IBAction func resetPwdBTN(sender: AnyObject) {
         if emailIdTF.text!.isEmpty{
@@ -58,6 +60,7 @@ class ForgotPasswordViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
     }
+    // MARK: - Alert
     // Function to display the error message
     func displayMyAlertMessage(userMessage:String) {
         let myAlert = UIAlertController(title:"Alert", message:userMessage, preferredStyle: UIAlertControllerStyle.Alert)

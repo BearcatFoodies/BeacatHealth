@@ -9,21 +9,37 @@ import Parse
 import Bolts
 //This view controller gets the data from profile view and stores them in profile table
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
+   // An outlet for name label
     @IBOutlet weak var name: UILabel!
+    // An outlet for activity indicator
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    // An outlet for height picker view
     @IBOutlet weak var heightPV: UIPickerView!
+    // An outlet for weight picker view
     @IBOutlet weak var weightPV: UIPickerView!
+    // An outlet for gender picker view
     @IBOutlet weak var genderPV: UIPickerView!
+    // An outlet for activity picker view
     @IBOutlet weak var activityPV: UIPickerView!
+    // An outlet for profile picture image view
     @IBOutlet weak var profilePhotoIV: UIImageView!
-    let  profile =  Profile()
+    // An outlet for profile age picker view
     @IBOutlet weak var agePV: UIPickerView!
+    // Creates an object for profile class
+    let  profile =  Profile()
+    // This property allows us to access Appdelegate data in this class
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    // Holds the values of gender values for gender picker view
     var genderArray:[String] = ["Male", "Female"]
+    // Holds the values of height values for height picker view
     var heightArray:[Int] = []
+    // Holds the values of weight values for weight picker view
     var weightArray:[Int] = []
+    // Holds the values of activity values for activity picker view
     var activityArray:[String] = ["Light Activity", "Moderate Activity", "Heavy Activity"]
+     // Holds the values of age values for age picker view
     var ageArray:[Int] = []
+    // MARK: - Default methods
     override func viewWillAppear(animated: Bool) {
         activityIndicator.hidden = true
         name.text = "Hello, " + appDelegate.userName

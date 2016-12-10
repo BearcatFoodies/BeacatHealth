@@ -10,15 +10,21 @@ import UIKit
 import Parse
 import Bolts
 class ChooseFavoritesTableViewController:UITableViewController  {
+    // MARK: - properties
+    // A property which allows us to access Appdelegate data
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    var selected: Bool = false
+    // Object for parseoperations class
     var parseOperations:ParseOperations!
-    var selectedIndexPath:Int = 0
+    // Outlet for tableview
     @IBOutlet weak var tableview: UITableView!
     // These variables hold entire data of breakfast , lunch , dinner and latenight
+    // Stores breakfast data
     var breakfast:[FoodData] = []
+    // Stores lunch data
     var lunch:[FoodData] = []
+    // Stores dinner data
     var dinner:[FoodData] = []
+    // Stores latenight data
     var lateNight:[FoodData] = []
     // These values stores the selected values
     var selectedBreakfastData:FoodData = FoodData()
@@ -40,12 +46,10 @@ class ChooseFavoritesTableViewController:UITableViewController  {
     var favLunch:[String] = []
     var favDinner : [String] = []
     var favLateNight: [String] = []
+    // MARK: - default methods
     override func viewDidLoad() {
         parseOperations = ParseOperations()
         super.viewDidLoad()
-    }
-    func foodIsHere(notification:NSNotification){
-        self.tableView.reloadData()
     }
     override func viewWillAppear(animated: Bool) {
         for favorite in favoriteBreakfast {
@@ -66,8 +70,76 @@ class ChooseFavoritesTableViewController:UITableViewController  {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(foodIsHere(_:)), name: "Favorites Dinner Is Served", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(foodIsHere(_:)), name: "Favorites LateNight Is Served", object: nil)
     }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    // MARK: - Notification handler
+    // It reloads table view once favorites data retrieved notification is received
+    func foodIsHere(notification:NSNotification){
+        self.tableView.reloadData()
+    }
+    // MARK: - Table view methods
+    //return the number of sections in a table
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 4
+    }
+    //return the number of rows
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            if breakfast.count == 0{
+                return 0
+            }else{
+                return breakfast.count
+            }
+        } else if section == 1 {
+            if lunch.count == 0{
+                return 0
+            }else{
+                return lunch.count
+            }
+        } else if section == 2{
+            if dinner.count == 0{
+                return 0
+            }else{
+                return dinner.count
+            }
+        }else {
+            if lateNight.count == 0{
+                return 0
+            }else{
+                return lateNight.count
+            }
+        }
+    }
+    // It populates data into tableview cells
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("chooseFavorites", forIndexPath: indexPath)
+        let dishNameLBL:UILabel = cell.viewWithTag(101) as! UILabel
+        let dishCaloriesLBL:UILabel = cell.viewWithTag(102) as! UILabel
+        let dishIV:UIImageView = cell.viewWithTag(100) as! UIImageView
+        // Configure the cell...
+        if indexPath.section == 0 {
+            dishNameLBL.text = breakfast[indexPath.row].itemName
+            dishCaloriesLBL.text = String(breakfast[indexPath.row].calories ) + " cal"
+            dishIV.image = UIImage(named:"\(breakfast[indexPath.row].itemName).jpg")
+        } else if indexPath.section == 1 {
+            dishNameLBL.text = lunch[indexPath.row].itemName
+            dishCaloriesLBL.text = String(lunch[indexPath.row].calories) + " cal"
+            dishIV.image = UIImage(named:"\(lunch[indexPath.row].itemName).jpg")
+        } else if indexPath.section == 2{
+            dishNameLBL.text = dinner[indexPath.row].itemName
+            dishCaloriesLBL.text = String(dinner[indexPath.row].calories) + " cal"
+            dishIV.image = UIImage(named:"\(dinner[indexPath.row].itemName).jpg")
+        } else {
+            dishNameLBL.text = lateNight[indexPath.row].itemName
+            dishCaloriesLBL.text = String(lateNight[indexPath.row].calories) + " cal"
+            dishIV.image = UIImage(named:"\(lateNight[indexPath.row].itemName).jpg")
+        }
+        return cell
+    }
+    // It stores the selected breakfast, lunch,dinner and latenight data into respective favories section.
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
         if indexPath.section == 0 {
             selectedBreakfastData = breakfast[indexPath.row]
             selectedFavoriteBreakfastData.itemName = selectedBreakfastData.itemName
@@ -102,6 +174,7 @@ class ChooseFavoritesTableViewController:UITableViewController  {
             selectedFavoriteLateNightData.sid  = appDelegate.userName
         }
     }
+    // it resets the select select breakfast,lunch,dinner and latenight variables once they are deselected from the tableview cell
     override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.cellForRowAtIndexPath(indexPath)?.accessoryType =
             UITableViewCellAccessoryType.None
@@ -116,72 +189,13 @@ class ChooseFavoritesTableViewController:UITableViewController  {
         }
         
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    //return the number of sections in a table
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 4
-    }
-    //return the number of rows
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            if breakfast.count == 0{
-                return 0
-            }else{
-                return breakfast.count
-            }
-        } else if section == 1 {
-            if lunch.count == 0{
-                return 0
-            }else{
-                return lunch.count
-            }
-        } else if section == 2{
-            if dinner.count == 0{
-                return 0
-            }else{
-                return dinner.count
-            }
-        }else {
-            if lateNight.count == 0{
-                return 0
-            }else{
-                return lateNight.count
-            }
-        }
-    }
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("chooseFavorites", forIndexPath: indexPath)
-        let dishNameLBL:UILabel = cell.viewWithTag(101) as! UILabel
-        let dishCaloriesLBL:UILabel = cell.viewWithTag(102) as! UILabel
-        let dishIV:UIImageView = cell.viewWithTag(100) as! UIImageView
-        // Configure the cell...
-        if indexPath.section == 0 {
-            dishNameLBL.text = breakfast[indexPath.row].itemName
-            dishCaloriesLBL.text = String(breakfast[indexPath.row].calories ) + " cal"
-            dishIV.image = UIImage(named:"\(breakfast[indexPath.row].itemName).jpg")
-        } else if indexPath.section == 1 {
-            dishNameLBL.text = lunch[indexPath.row].itemName
-            dishCaloriesLBL.text = String(lunch[indexPath.row].calories) + " cal"
-            dishIV.image = UIImage(named:"\(lunch[indexPath.row].itemName).jpg")
-        } else if indexPath.section == 2{
-            dishNameLBL.text = dinner[indexPath.row].itemName
-            dishCaloriesLBL.text = String(dinner[indexPath.row].calories) + " cal"
-            dishIV.image = UIImage(named:"\(dinner[indexPath.row].itemName).jpg")
-        } else {
-            dishNameLBL.text = lateNight[indexPath.row].itemName
-            dishCaloriesLBL.text = String(lateNight[indexPath.row].calories) + " cal"
-            dishIV.image = UIImage(named:"\(lateNight[indexPath.row].itemName).jpg")
-        }
-        return cell
-    }
+    // It adjusts the font and size of text in the header of a tableview
     override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header = view as! UITableViewHeaderFooterView
         header.textLabel!.textColor = UIColor.blackColor()
         header.textLabel!.font = UIFont(name: "Futura", size: 25)!
     }
+    // This method sets the names of headers of tableview
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
             return "Breakfast"
@@ -193,6 +207,8 @@ class ChooseFavoritesTableViewController:UITableViewController  {
             return "Latenight"
         }
     }
+    // MARK: - Favorites addition
+    // This method adds the selected item into favorites
     @IBAction func addToFavorites(sender: UIBarButtonItem) {
         if selectedBreakfastData.calories == 0 && selectedLunchData.calories == 0 && selectedDinnerData.calories == 0 && selectedLateNightData.calories == 0  {
             displayAlertWithTitle("", message: "Please select at least one item to add into favorites")
@@ -210,9 +226,11 @@ class ChooseFavoritesTableViewController:UITableViewController  {
             addFavLateNight()
         }
     }
+    // This method displays an alert if favories are added into database
     func favoritesAdded(notification:NSNotification){
         displayAlertWithTitle("", message: "Added to Favorites")
     }
+    // This method adds selected breakfast into favrite breakfast table
     func addFavBreakfast() {
         if favbreakfast.contains(selectedBreakfastData.itemName) {
             displayAlertWithTitle("", message: "Already Present in Favorites")
@@ -223,6 +241,7 @@ class ChooseFavoritesTableViewController:UITableViewController  {
             displayFavoriteAdded("",message:"\(selectedFavoriteBreakfastData.itemName) is added to favorites")
         }
     }
+    // This method adds selected lunch into favorite lunch table
     func addFavLunch() {
         if favLunch.contains(selectedLunchData.itemName) {
             displayAlertWithTitle("", message: "Already Present in Favorites")
@@ -235,6 +254,7 @@ class ChooseFavoritesTableViewController:UITableViewController  {
             performSegueWithIdentifier("addedFavorites", sender: self)
         }
     }
+    // This method adds selected dinner into favorite dinner table
     func addFavDinner() {
         if favDinner.contains(selectedDinnerData.itemName) {
             displayAlertWithTitle("", message: "Already Present in Favorites")
@@ -246,6 +266,7 @@ class ChooseFavoritesTableViewController:UITableViewController  {
             favDinner.append(selectedFavoriteDinnerData.itemName)
         }
     }
+    // This method adds selected latenight into favorite latenight table
     func addFavLateNight() {
         if favLateNight.contains(selectedLateNightData.itemName ) {
             displayAlertWithTitle("", message: "Already Present in Favorites")
@@ -256,6 +277,7 @@ class ChooseFavoritesTableViewController:UITableViewController  {
             favLateNight.append(selectedFavoriteLateNightData.itemName)
         }
     }
+    // MARK: - alerts
     func displayAlertWithTitle(title:String, message:String){
         let alert:UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         let defaultAction:UIAlertAction =  UIAlertAction(title: "OK", style: .Default, handler: nil)

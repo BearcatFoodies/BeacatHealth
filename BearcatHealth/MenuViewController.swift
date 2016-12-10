@@ -11,10 +11,10 @@ class MenuViewController: UIViewController {
     // MARK: - Properties
     // This property allows us to share app delgate class data
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-   // Created implicitly unwrapped optional for parase opeartions class
+    // Created implicitly unwrapped optional for parase opeartions class
     var parseOperations:ParseOperations!
     // Holds breakfast data
-    var  breakfastData:[FoodData] = []
+    var breakfastData:[FoodData] = []
     // Holds lunch data
     var lunchData:[FoodData] = []
     // Holds dinner data
@@ -23,19 +23,19 @@ class MenuViewController: UIViewController {
     var lateNightData:[FoodData] = []
     // created an object profile class
     var user = Profile()
-   // This static property holds the number of users retrived from the database
+    // This static property holds the number of users retrived from the database
     static var userscount  = 0
-   // Static property holds the breakfast intake calories
+    // class variable holds the breakfast intake calories
     static var  breakfastIntakeCalories:[CaloriesData] = []
-    // Static property holds the lunch intake calories
+    // class variable holds the lunch intake calories
     static var lunchIntakeCalories:[CaloriesData] = []
-    // Static property holds the dinner intake calories
+    // class variabley holds the dinner intake calories
     static var dinnerIntakeCalories:[CaloriesData] = []
-    // Static property holds latenight intake calories
+    // class variableholds latenight intake calories
     static var lateNightIntakeCalories:[CaloriesData] = []
-   
-    // We will be displaying user intake calories . So We are retriving intake calories inadvance to handle the delay due to parse operations
     
+    // We will be displaying user intake calories . So We are retriving intake calories inadvance to handle the delay due to parse operations
+    // MARK: - Default methods
     override func viewDidLoad() {
         // Do any additional setup after loading the view, typically from a nib.
         super.viewDidLoad()
@@ -43,10 +43,10 @@ class MenuViewController: UIViewController {
         displayAlertWithTitle("", message: "Logged in successfully!! Want to go through the menu ? Click on the menu types")
         self.title = "Menu"
         parseOperations = ParseOperations()
-        parseOperations.retriveBreakfastCalorieIntake(appDelegate.userName)
-        parseOperations.retriveLunchCalorieIntake(appDelegate.userName)
-        parseOperations.retriveDinnerCalorieIntake(appDelegate.userName)
-        parseOperations.retriveLateNightCalorieIntake(appDelegate.userName)
+        parseOperations.retrieveBreakfastCalorieIntake(appDelegate.userName)
+        parseOperations.retrieveLunchCalorieIntake(appDelegate.userName)
+        parseOperations.retrieveDinnerCalorieIntake(appDelegate.userName)
+        parseOperations.retrieveLateNightCalorieIntake(appDelegate.userName)
         parseOperations.retrieveUser(appDelegate.userName)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(userDetails(_:)), name: "User retrived", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(breakfastCaloriesHere(_:)), name: "User breakfast calories retrived", object: nil)
@@ -54,8 +54,10 @@ class MenuViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(dinnerCaloriesHere(_:)), name: "User dinner calories retrived", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(lateNightCaloriesHere(_:)), name: "User latenight calories retrived", object: nil)
     }
-    
-    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
     // MARK: - Notification methods
     // This notification method adds the breakfast intake calories once data is fetched from parse database.
     func breakfastCaloriesHere(notification:NSNotification){
@@ -64,28 +66,28 @@ class MenuViewController: UIViewController {
             appDelegate.breakfastIntakeCalories += calori.calories
         }
     }
-     // This notification method adds the lunch intake calories once data is fetched from parse database.
+    // This notification method adds the lunch intake calories once data is fetched from parse database.
     func lunchCaloriesHere(notification:NSNotification){
         MenuViewController.lunchIntakeCalories = parseOperations.lunchIntake
         for calori in MenuViewController.lunchIntakeCalories {
             appDelegate.lunchIntakeCalories += calori.calories
         }
     }
-     // This notification method adds the dinner intake calories once data is fetched from parse database.
+    // This notification method adds the dinner intake calories once data is fetched from parse database.
     func dinnerCaloriesHere(notification:NSNotification){
         MenuViewController.dinnerIntakeCalories = parseOperations.dinnerIntake
         for calori in MenuViewController.dinnerIntakeCalories {
             appDelegate.dinnerIntakeCalories += calori.calories
         }
     }
-     // This notification method adds the latenight intake calories once data is fetched from parse database.
+    // This notification method adds the latenight intake calories once data is fetched from parse database.
     func lateNightCaloriesHere(notification:NSNotification){
         MenuViewController.lateNightIntakeCalories = parseOperations.lateNightIntake
         for calori in MenuViewController.lateNightIntakeCalories {
             appDelegate.lateNightIntakeCalories += calori.calories
         }
     }
-     // MARK: - Calorie intake calculation
+    // MARK: - Calorie intake calculation
     // Below method calculates calories supposed to be consumed based on the user profile(BMI)
     func calorieIntake () {
         var calories = 0.0
@@ -144,7 +146,7 @@ class MenuViewController: UIViewController {
             lateNightTVC.foodInfo = ParseOperations.lateNightData.sort({ $0.itemName < $1.itemName})
             lateNightTVC.lateNightIntakeCalories = parseOperations.dinnerIntake        }
     }
-     // MARK: - Alerts
+    // MARK: - Alerts
     // Below method populates alert
     func displayAlertWithTitle(title:String, message:String) {
         let uiAlertController:UIAlertController = UIAlertController(title: title,
@@ -155,9 +157,6 @@ class MenuViewController: UIViewController {
             self.presentViewController(uiAlertController, animated: true, completion: nil)
         }
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    
 }
 

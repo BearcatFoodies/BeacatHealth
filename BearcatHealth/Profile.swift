@@ -2,7 +2,7 @@
 //  Profile.swift
 //  BearcatHealth
 //
-//  Created by Pachipulusu,Venkatakotianilkumar on 10/25/16.
+//  Created by Gayam,Prathibha on 10/25/16.
 //  Copyright © 2016 Gayam,Prathibha. All rights reserved.
 //
 
